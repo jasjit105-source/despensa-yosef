@@ -1,0 +1,9 @@
+pandas
+openpyxl
+reportlab
+requests
+beautifulsoup4
+Pillow
+deep-translator
+python-dotenv
+python-bidi
