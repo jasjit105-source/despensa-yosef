@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: despensa-yosef
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn server:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: GOOGLE_CX
+        sync: false
+      - key: MARKUP_PERCENT
+        value: "37"
+      - key: EXCHANGE_RATE
+        value: "18"
+      - key: BUSINESS_NAME
+        value: "Despensa Yosef"
+      - key: WHATSAPP_NUMBER
+        sync: false
+      - key: PYTHON_VERSION
+        value: "3.11.0"

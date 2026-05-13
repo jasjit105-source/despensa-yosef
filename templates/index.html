@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Despensa Yosef - Premium Kosher Grocery</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--green:#1B4332;--green-mid:#2D6A4F;--green-light:#40916C;
+--gold:#D4AF37;--gold-light:#F5E6A3;
+--black:#1A1A1A;--white:#FFF;--off-white:#FAFAFA;
+--gray:#6B7280;--gray-light:#E5E7EB;--red:#DC2626;--red-light:#FEE2E2;
+--success:#059669;
+}
+body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--black);line-height:1.6;-webkit-font-smoothing:antialiased}
+.header{background:var(--green);position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.header-top{display:flex;align-items:center;justify-content:space-between;max-width:1400px;margin:0 auto;padding:10px 16px;gap:8px}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+.logo-icon{font-size:20px;color:var(--gold)}
+.logo-text{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--gold);letter-spacing:1px}
+.logo-sub{font-size:9px;color:rgba(255,255,255,.5);letter-spacing:2px;text-transform:uppercase}
+.header-controls{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.search-bar{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:7px 14px;color:#fff;font-size:13px;width:180px;outline:none;font-family:'Inter',sans-serif}
+.search-bar::placeholder{color:rgba(255,255,255,.5)}
+.search-bar:focus{border-color:var(--gold);background:rgba(255,255,255,.2)}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-decoration:none;font-family:'Inter',sans-serif;white-space:nowrap}
+.btn-gold{background:var(--gold);color:var(--green)}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-green{background:var(--green-light);color:#fff}
+.btn-green:hover{background:var(--green-mid)}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:#B91C1C}
+.btn-outline{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+.btn-outline:hover{background:var(--gold);color:var(--green)}
+.btn-sm{padding:5px 10px;font-size:11px}
+.toggle-group{display:flex;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.2)}
+.toggle-btn{background:transparent;color:rgba(255,255,255,.7);border:none;padding:5px 10px;font-size:11px;cursor:pointer;font-weight:600;transition:all .2s;font-family:'Inter',sans-serif}
+.toggle-btn.active{background:var(--gold);color:var(--green)}
+
+/* CART ICON */
+.cart-btn{position:relative;background:transparent;border:1px solid var(--gold);color:var(--gold);padding:6px 12px;border-radius:20px;cursor:pointer;font-size:16px;font-family:'Inter',sans-serif;transition:all .2s}
+.cart-btn:hover{background:var(--gold);color:var(--green)}
+.cart-count{position:absolute;top:-6px;right:-6px;background:var(--red);color:#fff;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.cart-count:empty{display:none}
+
+/* NAV */
+.nav{background:var(--green-mid);border-top:1px solid rgba(255,255,255,.1)}
+.nav-inner{max-width:1400px;margin:0 auto;display:flex;gap:0;overflow-x:auto;padding:0 12px;-webkit-overflow-scrolling:touch}
+.nav-inner::-webkit-scrollbar{height:2px}
+.nav-inner::-webkit-scrollbar-thumb{background:var(--gold)}
+.nav-btn{background:none;border:none;color:rgba(255,255,255,.8);padding:9px 14px;font-size:11px;font-weight:500;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;font-family:'Inter',sans-serif;transition:all .2s}
+.nav-btn:hover,.nav-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--green),var(--green-mid));padding:24px 16px;text-align:center}
+.hero h1{font-family:'Playfair Display',serif;font-size:28px;color:var(--gold)}
+.hero p{color:rgba(255,255,255,.7);font-size:13px;margin-top:4px}
+.stats{display:flex;justify-content:center;gap:24px;margin-top:12px}
+.stat-num{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);font-weight:700}
+.stat-label{font-size:9px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px}
+
+/* ADMIN BAR */
+.admin-bar{background:var(--gold-light);padding:8px 16px;display:none;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.admin-bar.show{display:flex}
+.admin-bar label{font-size:12px;font-weight:600;color:var(--green)}
+.file-input{font-size:11px;max-width:200px}
+.upload-status{font-size:11px;color:var(--green);font-weight:500}
+
+/* ADMIN TABS */
+.admin-tabs{display:none;background:var(--green);padding:0 16px}
+.admin-tabs.show{display:block}
+.admin-tabs-inner{max-width:1400px;margin:0 auto;display:flex;gap:0;overflow-x:auto}
+.admin-tab{background:none;border:none;color:rgba(255,255,255,.7);padding:10px 18px;font-size:12px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;font-family:'Inter',sans-serif;transition:all .2s;white-space:nowrap}
+.admin-tab:hover,.admin-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* CONTAINER */
+.container{max-width:1400px;margin:0 auto;padding:16px}
+.section-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--green);margin:20px 0 10px;padding-bottom:4px;border-bottom:2px solid var(--gold);display:inline-block}
+.count-badge{background:var(--gold);color:var(--green);padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;margin-left:4px;font-family:'Inter',sans-serif}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:24px}
+
+/* CARD */
+.card{background:var(--white);border-radius:10px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid var(--gray-light);position:relative;transition:all .2s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.card-badge{position:absolute;top:6px;right:6px;background:var(--green);color:var(--gold);padding:2px 8px;border-radius:12px;font-size:9px;font-weight:600}
+.card-del{position:absolute;top:6px;left:6px;background:var(--red);color:#fff;border:none;width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:13px;display:none;align-items:center;justify-content:center}
+.admin-mode .card-del{display:flex}
+.card-img{width:100%;aspect-ratio:1;background:#f3f4f6;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid var(--gray-light)}
+.card-img img{max-width:85%;max-height:85%;object-fit:contain}
+.no-img{color:var(--gray);font-size:12px}
+.card-body{padding:10px;flex:1}
+.card-hebrew{font-size:13px;color:var(--green);font-weight:600;text-align:right;direction:rtl;min-height:18px;margin-bottom:2px}
+.card-name{font-size:12px;font-weight:600;color:var(--black);margin-bottom:3px;line-height:1.3}
+.card-meta{display:flex;justify-content:space-between;font-size:10px;color:var(--gray);margin-bottom:4px}
+.card-size{background:var(--off-white);padding:1px 5px;border-radius:3px}
+.card-footer{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--off-white);border-top:1px solid var(--gray-light);gap:6px}
+.card-price{font-family:'Playfair Display',serif;font-size:18px;color:var(--green);font-weight:700;border:1px solid transparent;padding:2px 4px;border-radius:4px;flex-shrink:0}
+.admin-mode .card-price{border:1px dashed var(--gold);cursor:text}
+.card-cart-btn{background:var(--green);color:var(--gold);border:none;padding:6px 12px;border-radius:14px;font-size:11px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-family:'Inter',sans-serif;transition:all .2s;white-space:nowrap}
+.card-cart-btn:hover{background:var(--gold);color:var(--green)}
+.card-cart-btn.added{background:var(--success);color:#fff}
+
+/* CART DRAWER */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-overlay.open{opacity:1;pointer-events:auto}
+.cart-drawer{position:fixed;top:0;right:-400px;width:min(400px,92vw);height:100%;background:#fff;z-index:301;box-shadow:-4px 0 30px rgba(0,0,0,.2);transition:right .3s;display:flex;flex-direction:column}
+.cart-drawer.open{right:0}
+.cart-header{background:var(--green);color:var(--gold);padding:16px;display:flex;justify-content:space-between;align-items:center}
+.cart-header h2{font-family:'Playfair Display',serif;font-size:20px}
+.cart-close{background:none;border:none;color:var(--gold);font-size:24px;cursor:pointer}
+.cart-items{flex:1;overflow-y:auto;padding:12px}
+.cart-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray-light);align-items:center}
+.cart-item-img{width:50px;height:50px;border-radius:6px;overflow:hidden;background:#f3f4f6;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cart-item-img img{max-width:100%;max-height:100%;object-fit:contain}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-name{font-size:12px;font-weight:600;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cart-item-price{font-size:13px;color:var(--green);font-weight:700}
+.cart-item-qty{display:flex;align-items:center;gap:6px}
+.qty-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--gray-light);background:#fff;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;font-weight:600}
+.qty-btn:hover{background:var(--gold-light)}
+.qty-val{font-weight:600;font-size:13px;min-width:20px;text-align:center}
+.cart-item-remove{background:none;border:none;color:var(--red);cursor:pointer;font-size:16px;padding:4px}
+.cart-empty{text-align:center;padding:40px 20px;color:var(--gray)}
+.cart-footer{border-top:2px solid var(--green);padding:16px;background:var(--off-white)}
+.cart-total{display:flex;justify-content:space-between;font-size:16px;font-weight:700;margin-bottom:12px}
+.cart-total span:last-child{color:var(--green);font-family:'Playfair Display',serif;font-size:20px}
+.cart-checkout-btn{width:100%;padding:14px;background:var(--green);color:var(--gold);border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.cart-checkout-btn:hover{background:var(--gold);color:var(--green)}
+.cart-checkout-btn:disabled{opacity:.5;cursor:default}
+
+/* CHECKOUT VIEW */
+.view{display:none}
+.view.active{display:block}
+.checkout-page{max-width:700px;margin:0 auto;padding:20px 16px}
+.checkout-page h2{font-family:'Playfair Display',serif;color:var(--green);font-size:24px;margin-bottom:16px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--green);margin-bottom:4px}
+.form-input{width:100%;padding:10px 12px;border:1px solid var(--gray-light);border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;transition:border .2s}
+.form-input:focus{border-color:var(--gold);outline:none}
+textarea.form-input{resize:vertical;min-height:60px}
+.payment-options{display:flex;gap:12px;flex-wrap:wrap}
+.payment-option{flex:1;min-width:140px;padding:14px;border:2px solid var(--gray-light);border-radius:10px;cursor:pointer;text-align:center;transition:all .2s}
+.payment-option.selected{border-color:var(--gold);background:var(--gold-light)}
+.payment-option h4{font-size:13px;margin-bottom:2px}
+.payment-option p{font-size:11px;color:var(--gray)}
+.checkout-summary{background:#fff;border:1px solid var(--gray-light);border-radius:10px;padding:16px;margin-bottom:16px}
+.checkout-summary h3{font-family:'Playfair Display',serif;color:var(--green);margin-bottom:10px;font-size:16px}
+.checkout-item{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid var(--gray-light)}
+.checkout-item:last-child{border:none}
+.checkout-total-row{display:flex;justify-content:space-between;font-size:16px;font-weight:700;color:var(--green);padding-top:10px;border-top:2px solid var(--gold);margin-top:8px}
+.checkout-submit{width:100%;padding:16px;background:var(--green);color:var(--gold);border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:16px;transition:all .2s}
+.checkout-submit:hover{background:var(--gold);color:var(--green)}
+.checkout-submit:disabled{opacity:.5;cursor:default}
+.order-success{text-align:center;padding:40px 20px}
+.order-success h2{color:var(--success);font-family:'Playfair Display',serif;font-size:28px;margin-bottom:8px}
+.order-success .order-num{font-size:36px;color:var(--green);font-family:'Playfair Display',serif;font-weight:700;margin:12px 0}
+
+/* FINANCIAL TAB */
+.fin-page{max-width:1200px;margin:0 auto;padding:20px 16px}
+.fin-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:24px}
+.fin-card{background:#fff;border-radius:10px;padding:16px;border:1px solid var(--gray-light);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.fin-card-label{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.fin-card-value{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--green)}
+.fin-card-value.positive{color:var(--success)}
+.fin-card-value.negative{color:var(--red)}
+.fin-section{margin-bottom:30px}
+.fin-section h3{font-family:'Playfair Display',serif;color:var(--green);font-size:18px;margin-bottom:12px;padding-bottom:4px;border-bottom:2px solid var(--gold);display:inline-block}
+.fin-form{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:14px;background:#fff;padding:14px;border-radius:10px;border:1px solid var(--gray-light)}
+.fin-form .form-group{margin-bottom:0;flex:1;min-width:120px}
+.fin-form .form-group label{font-size:11px}
+.fin-form .form-input{padding:8px;font-size:12px}
+.data-table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden;border:1px solid var(--gray-light);font-size:12px}
+.data-table th{background:var(--green);color:var(--gold);padding:10px 12px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
+.data-table td{padding:8px 12px;border-bottom:1px solid var(--gray-light)}
+.data-table tr:hover{background:var(--gold-light)}
+.data-table .low-stock{color:var(--red);font-weight:600}
+.inv-input{width:60px;padding:4px 6px;border:1px solid var(--gray-light);border-radius:4px;font-size:12px;text-align:center}
+
+/* ORDERS TAB */
+.order-card{background:#fff;border:1px solid var(--gray-light);border-radius:10px;padding:14px;margin-bottom:12px}
+.order-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.order-id{font-family:'Playfair Display',serif;font-size:16px;color:var(--green);font-weight:700}
+.order-status{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:600;text-transform:uppercase}
+.status-pending{background:#FEF3C7;color:#92400E}
+.status-confirmed{background:#D1FAE5;color:#065F46}
+.status-delivered{background:#DBEAFE;color:#1E40AF}
+.status-cancelled{background:var(--red-light);color:var(--red)}
+.order-detail{font-size:12px;color:var(--gray);margin-bottom:4px}
+.order-items-list{font-size:12px;margin:8px 0;padding:8px;background:var(--off-white);border-radius:6px}
+.order-actions{display:flex;gap:6px;flex-wrap:wrap}
+.order-actions select{padding:5px 8px;border:1px solid var(--gray-light);border-radius:6px;font-size:11px;font-family:'Inter',sans-serif}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-bg.show{display:flex}
+.modal{background:#fff;border-radius:12px;padding:20px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h3{font-family:'Playfair Display',serif;color:var(--green);margin-bottom:14px}
+.modal input{width:100%;padding:10px;border:1px solid var(--gray-light);border-radius:6px;font-size:14px;margin-bottom:10px}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end}
+.no-results{text-align:center;padding:40px;color:var(--gray);font-size:14px}
+
+/* FOOTER */
+.footer{background:var(--green);color:#fff;padding:24px 16px;margin-top:30px}
+.footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold)}
+.footer-text{color:rgba(255,255,255,.5);font-size:11px}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--green);color:var(--gold);padding:10px 24px;border-radius:24px;font-size:13px;font-weight:600;z-index:400;opacity:0;transition:opacity .3s;pointer-events:none;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.toast.show{opacity:1}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .header-top{flex-wrap:wrap;padding:8px 12px}
+  .logo-text{font-size:16px}
+  .search-bar{width:100%;order:10;margin-top:4px}
+  .header-controls{width:100%;justify-content:space-between;order:5}
+  .hero{padding:16px 12px}
+  .hero h1{font-size:22px}
+  .stats{gap:16px}
+  .stat-num{font-size:18px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .card-img{aspect-ratio:1}
+  .card-body{padding:8px}
+  .card-hebrew{font-size:11px;min-height:14px}
+  .card-name{font-size:11px}
+  .card-meta{font-size:9px}
+  .card-footer{padding:6px 8px;flex-wrap:wrap}
+  .card-price{font-size:15px}
+  .card-cart-btn{font-size:10px;padding:5px 8px}
+  .container{padding:10px}
+  .section-title{font-size:15px}
+  .footer-inner{flex-direction:column;text-align:center}
+  .fin-cards{grid-template-columns:repeat(2,1fr);gap:8px}
+  .fin-card{padding:10px}
+  .fin-card-value{font-size:18px}
+  .data-table{font-size:11px}
+  .data-table th,.data-table td{padding:6px 8px}
+  .payment-options{flex-direction:column}
+}
+@media(max-width:400px){
+  .grid{grid-template-columns:1fr}
+}
+@media print{
+  .header,.nav,.hero,.footer,.cart-btn,.admin-bar,.admin-tabs,.btn{display:none!important}
+  .grid{grid-template-columns:repeat(3,1fr)!important;gap:4px!important}
+  .card{box-shadow:none!important;border:1px solid #ddd!important}
+  .card-cart-btn,.card-del{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-top">
+    <a href="#" class="logo" onclick="showView('catalog');return false">
+      <span class="logo-icon">&#10017;</span>
+      <div><div class="logo-text">DESPENSA YOSEF</div><div class="logo-sub" data-i18n="subtitle">Premium Kosher Grocery</div></div>
+    </a>
+    <div class="header-controls">
+      <input type="text" class="search-bar" id="searchInput" data-i18n-ph="search_placeholder" placeholder="Search products...">
+      <div class="toggle-group" id="langToggle">
+        <button class="toggle-btn active" onclick="setLang('en',this)">EN</button>
+        <button class="toggle-btn" onclick="setLang('es',this)">ES</button>
+      </div>
+      <div class="toggle-group" id="currToggle">
+        <button class="toggle-btn" onclick="setCurrency('usd',this)">USD</button>
+        <button class="toggle-btn active" onclick="setCurrency('mxn',this)">MXN</button>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="toggleAdmin()" data-i18n="admin_btn">Admin</button>
+      <button class="cart-btn" onclick="toggleCart()">&#128722;<span class="cart-count" id="cartCount"></span></button>
+    </div>
+  </div>
+  <nav class="nav" id="catalogNav"><div class="nav-inner" id="navCategories"></div></nav>
+  <div class="admin-tabs" id="adminTabs">
+    <div class="admin-tabs-inner">
+      <button class="admin-tab active" onclick="showAdminTab('catalog',this)" data-i18n="tab_catalog">Catalog</button>
+      <button class="admin-tab" onclick="showAdminTab('orders',this)" data-i18n="tab_orders">Orders</button>
+      <button class="admin-tab" onclick="showAdminTab('financial',this)" data-i18n="tab_financial">Financial</button>
+      <button class="admin-tab" onclick="showAdminTab('inventory',this)" data-i18n="tab_inventory">Inventory</button>
+    </div>
+  </div>
+</header>
+
+<div class="admin-bar" id="adminBar">
+  <label data-i18n="upload_label">Upload Excel:</label>
+  <input type="file" class="file-input" id="fileInput" accept=".xlsx,.xls,.csv">
+  <button class="btn btn-gold btn-sm" onclick="uploadFile()" data-i18n="upload_btn">Upload & Process</button>
+  <span class="upload-status" id="uploadStatus"></span>
+</div>
+
+<!-- CATALOG VIEW -->
+<div class="view active" id="viewCatalog">
+  <section class="hero">
+    <h1>&#10017; Despensa Yosef &#10017;</h1>
+    <p data-i18n="hero_text">Premium kosher grocery products</p>
+    <div class="stats">
+      <div><div class="stat-num" id="statProducts">0</div><div class="stat-label" data-i18n="products">Products</div></div>
+      <div><div class="stat-num" id="statCategories">0</div><div class="stat-label" data-i18n="categories">Categories</div></div>
+      <div><div class="stat-num" id="statBrands">0</div><div class="stat-label" data-i18n="brands">Brands</div></div>
+    </div>
+  </section>
+  <main class="container" id="catalog"></main>
+</div>
+
+<!-- CHECKOUT VIEW -->
+<div class="view" id="viewCheckout">
+  <div class="checkout-page" id="checkoutForm">
+    <h2 data-i18n="checkout_title">Checkout</h2>
+    <div class="checkout-summary" id="checkoutSummary"></div>
+    <div class="form-group">
+      <label data-i18n="your_name">Your Name *</label>
+      <input type="text" class="form-input" id="coName" required>
+    </div>
+    <div class="form-group">
+      <label data-i18n="your_phone">Phone (WhatsApp) *</label>
+      <input type="tel" class="form-input" id="coPhone" required>
+    </div>
+    <div class="form-group">
+      <label data-i18n="delivery_address">Delivery Address</label>
+      <textarea class="form-input" id="coAddress"></textarea>
+    </div>
+    <div class="form-group">
+      <label data-i18n="order_notes">Notes</label>
+      <input type="text" class="form-input" id="coNotes" data-i18n-ph="notes_placeholder" placeholder="Special instructions...">
+    </div>
+    <div class="form-group">
+      <label data-i18n="payment_method">Payment Method</label>
+      <div class="payment-options" id="paymentOptions">
+        <div class="payment-option selected" onclick="selectPayment('pay_on_delivery',this)">
+          <h4 data-i18n="pay_delivery">Pay on Delivery</h4>
+          <p data-i18n="pay_delivery_desc">Pay when you receive</p>
+        </div>
+        <div class="payment-option" onclick="selectPayment('bank_transfer',this)">
+          <h4 data-i18n="pay_transfer">Bank Transfer</h4>
+          <p data-i18n="pay_transfer_desc">Transfer before delivery</p>
+        </div>
+      </div>
+    </div>
+    <button class="checkout-submit" onclick="submitOrder()" data-i18n="place_order">Place Order</button>
+    <button class="btn btn-outline" style="width:100%;margin-top:10px;justify-content:center" onclick="showView('catalog')" data-i18n="back_shopping">Back to Shopping</button>
+  </div>
+  <div class="order-success" id="orderSuccess" style="display:none">
+    <h2 data-i18n="order_placed">Order Placed!</h2>
+    <p data-i18n="order_thanks">Thank you for your order</p>
+    <div class="order-num" id="orderNum"></div>
+    <p id="orderPaymentMsg" style="margin:12px 0;color:var(--gray)"></p>
+    <button class="btn btn-gold" onclick="showView('catalog');clearCart()" data-i18n="continue_shopping">Continue Shopping</button>
+  </div>
+</div>
+
+<!-- ORDERS VIEW (admin) -->
+<div class="view" id="viewOrders">
+  <div class="fin-page">
+    <h2 style="font-family:'Playfair Display',serif;color:var(--green);margin-bottom:16px" data-i18n="manage_orders">Manage Orders</h2>
+    <div id="ordersList"></div>
+  </div>
+</div>
+
+<!-- FINANCIAL VIEW (admin) -->
+<div class="view" id="viewFinancial">
+  <div class="fin-page">
+    <h2 style="font-family:'Playfair Display',serif;color:var(--green);margin-bottom:16px" data-i18n="financial_overview">Financial Overview</h2>
+    <div class="fin-cards" id="finCards"></div>
+
+    <div class="fin-section">
+      <h3 data-i18n="invoices">Invoices</h3>
+      <div class="fin-form" id="invoiceForm">
+        <div class="form-group"><label>Vendor *</label><input type="text" class="form-input" id="invVendor"></div>
+        <div class="form-group"><label>Invoice #</label><input type="text" class="form-input" id="invNumber"></div>
+        <div class="form-group"><label>Date</label><input type="date" class="form-input" id="invDate"></div>
+        <div class="form-group"><label>Amount</label><input type="number" class="form-input" id="invAmount" step="0.01"></div>
+        <div class="form-group"><label>Currency</label><select class="form-input" id="invCurrency"><option>USD</option><option>MXN</option></select></div>
+        <div class="form-group"><label>File</label><input type="file" class="form-input" id="invFile" accept=".pdf,.jpg,.png,.jpeg"></div>
+        <div class="form-group" style="display:flex;align-items:flex-end"><button class="btn btn-gold" onclick="uploadInvoice()">Add Invoice</button></div>
+      </div>
+      <div id="invoicesList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- INVENTORY VIEW (admin) -->
+<div class="view" id="viewInventory">
+  <div class="fin-page">
+    <h2 style="font-family:'Playfair Display',serif;color:var(--green);margin-bottom:16px" data-i18n="inventory_control">Inventory Control</h2>
+    <div id="inventoryTable"></div>
+  </div>
+</div>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h2 data-i18n="your_cart">Your Cart</h2>
+    <button class="cart-close" onclick="toggleCart()">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total"><span data-i18n="total">Total</span><span id="cartTotal">$0.00</span></div>
+    <button class="cart-checkout-btn" id="cartCheckoutBtn" onclick="goToCheckout()" data-i18n="checkout">Checkout</button>
+  </div>
+</div>
+
+<!-- PRICE EDIT MODAL -->
+<div class="modal-bg" id="priceModal">
+  <div class="modal">
+    <h3 data-i18n="edit_price">Edit Price</h3>
+    <p id="editProductName" style="margin-bottom:10px;color:var(--gray);font-size:13px"></p>
+    <label style="font-size:11px;color:var(--gray)">Price (USD)</label>
+    <input type="number" id="editPriceInput" step="0.01" min="0">
+    <p id="editMxnPreview" style="font-size:12px;color:var(--green);margin-bottom:10px"></p>
+    <div class="modal-actions">
+      <button class="btn btn-outline btn-sm" onclick="closeModal()" data-i18n="cancel">Cancel</button>
+      <button class="btn btn-gold btn-sm" onclick="savePrice()" data-i18n="save">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div><div class="footer-brand">&#10017; DESPENSA YOSEF</div><div class="footer-text" data-i18n="footer_text">Premium Kosher Grocery Catalog</div></div>
+    <div class="footer-text">Quality products for your home</div>
+  </div>
+</footer>
+
+<script>
+const API = window.location.origin;
+let PRODUCTS = [];
+let CART = JSON.parse(localStorage.getItem("dy_cart") || "[]");
+let currentCategory = "all";
+let searchTerm = "";
+let currency = "mxn";
+let lang = "en";
+let adminMode = false;
+let editingId = null;
+let exchangeRate = 18;
+let waLink = "#";
+let selectedPayment = "pay_on_delivery";
+
+const I18N = {
+  en: {
+    subtitle:"Premium Kosher Grocery", search_placeholder:"Search products...",
+    admin_btn:"Admin", upload_label:"Upload Excel:", upload_btn:"Upload & Process",
+    hero_text:"Premium kosher grocery products",
+    products:"Products", categories:"Categories", brands:"Brands",
+    edit_price:"Edit Price", cancel:"Cancel", save:"Save",
+    footer_text:"Premium Kosher Grocery Catalog",
+    all_products:"All Products", no_results:"No products found",
+    add_cart:"Add to Cart", in_cart:"In Cart", confirm_delete:"Delete this product?",
+    uploading:"Processing...", upload_done:"products added!", upc:"UPC",
+    your_cart:"Your Cart", total:"Total", checkout:"Checkout", cart_empty:"Your cart is empty",
+    checkout_title:"Checkout", your_name:"Your Name *", your_phone:"Phone (WhatsApp) *",
+    delivery_address:"Delivery Address", order_notes:"Notes", notes_placeholder:"Special instructions...",
+    payment_method:"Payment Method",
+    pay_delivery:"Pay on Delivery", pay_delivery_desc:"Pay cash when you receive your order",
+    pay_transfer:"Bank Transfer", pay_transfer_desc:"Transfer before delivery",
+    place_order:"Place Order", back_shopping:"Back to Shopping",
+    order_placed:"Order Placed!", order_thanks:"Thank you for your order",
+    continue_shopping:"Continue Shopping",
+    tab_catalog:"Catalog", tab_orders:"Orders", tab_financial:"Financial", tab_inventory:"Inventory",
+    manage_orders:"Manage Orders", financial_overview:"Financial Overview",
+    invoices:"Invoices", inventory_control:"Inventory Control",
+    revenue:"Revenue", costs:"Total Costs", profit:"Net Profit",
+    pending_orders:"Pending Orders", inventory_value:"Inventory Value", total_orders:"Total Orders",
+    added_to_cart:"Added to cart!", order_placed_msg:"Your order has been placed!",
+    pay_on_delivery_msg:"Please have cash ready for the delivery driver.",
+    bank_transfer_msg:"Please transfer the amount to complete your order. Details will be sent via WhatsApp.",
+    order_summary:"Order Summary", items:"items", qty:"Qty",
+    product:"Product", stock:"Stock", reorder:"Reorder Pt", action:"Action",
+    update:"Update", vendor:"Vendor", invoice_num:"Invoice #", date:"Date",
+    amount:"Amount", file:"File", view:"View", status:"Status",
+    name:"Name", phone:"Phone", address:"Address", payment:"Payment"
+  },
+  es: {
+    subtitle:"Abarrotes Kosher Premium", search_placeholder:"Buscar productos...",
+    admin_btn:"Admin", upload_label:"Subir Excel:", upload_btn:"Subir y Procesar",
+    hero_text:"Productos kosher premium para tu hogar",
+    products:"Productos", categories:"Categorias", brands:"Marcas",
+    edit_price:"Editar Precio", cancel:"Cancelar", save:"Guardar",
+    footer_text:"Catalogo de Abarrotes Kosher Premium",
+    all_products:"Todos", no_results:"No se encontraron productos",
+    add_cart:"Agregar", in_cart:"Agregado", confirm_delete:"Eliminar este producto?",
+    uploading:"Procesando...", upload_done:"productos agregados!", upc:"UPC",
+    your_cart:"Tu Carrito", total:"Total", checkout:"Pagar", cart_empty:"Tu carrito esta vacio",
+    checkout_title:"Finalizar Compra", your_name:"Tu Nombre *", your_phone:"Telefono (WhatsApp) *",
+    delivery_address:"Direccion de Entrega", order_notes:"Notas", notes_placeholder:"Instrucciones especiales...",
+    payment_method:"Metodo de Pago",
+    pay_delivery:"Pago Contra Entrega", pay_delivery_desc:"Paga en efectivo al recibir",
+    pay_transfer:"Transferencia", pay_transfer_desc:"Transfiere antes del envio",
+    place_order:"Realizar Pedido", back_shopping:"Volver a Comprar",
+    order_placed:"Pedido Realizado!", order_thanks:"Gracias por tu pedido",
+    continue_shopping:"Seguir Comprando",
+    tab_catalog:"Catalogo", tab_orders:"Pedidos", tab_financial:"Finanzas", tab_inventory:"Inventario",
+    manage_orders:"Gestionar Pedidos", financial_overview:"Resumen Financiero",
+    invoices:"Facturas", inventory_control:"Control de Inventario",
+    revenue:"Ingresos", costs:"Costos Totales", profit:"Ganancia Neta",
+    pending_orders:"Pedidos Pendientes", inventory_value:"Valor Inventario", total_orders:"Total Pedidos",
+    added_to_cart:"Agregado al carrito!", order_placed_msg:"Tu pedido ha sido realizado!",
+    pay_on_delivery_msg:"Ten efectivo listo para el repartidor.",
+    bank_transfer_msg:"Transfiere el monto para completar tu pedido. Los detalles se enviaran por WhatsApp.",
+    order_summary:"Resumen del Pedido", items:"articulos", qty:"Cant",
+    product:"Producto", stock:"Stock", reorder:"Pto Reorden", action:"Accion",
+    update:"Actualizar", vendor:"Proveedor", invoice_num:"Factura #", date:"Fecha",
+    amount:"Monto", file:"Archivo", view:"Ver", status:"Estado",
+    name:"Nombre", phone:"Telefono", address:"Direccion", payment:"Pago"
+  }
+};
+
+function t(key) { return (I18N[lang] && I18N[lang][key]) || I18N.en[key] || key; }
+
+function applyI18n() {
+  document.querySelectorAll("[data-i18n]").forEach(el => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll("[data-i18n-ph]").forEach(el => el.placeholder = t(el.dataset.i18nPh));
+}
+
+function setLang(l, btn) {
+  lang = l;
+  document.querySelectorAll("#langToggle .toggle-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  applyI18n();
+  renderProducts();
+  renderCart();
+}
+
+function setCurrency(c, btn) {
+  currency = c;
+  document.querySelectorAll("#currToggle .toggle-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderProducts();
+  renderCart();
+}
+
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2000);
+}
+
+// ── Views ──
+function showView(view) {
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  const el = document.getElementById("view" + view.charAt(0).toUpperCase() + view.slice(1));
+  if (el) el.classList.add("active");
+  document.getElementById("catalogNav").style.display = view === "catalog" ? "" : "none";
+  document.getElementById("adminBar").style.display = (view === "catalog" && adminMode) ? "flex" : "none";
+  if (view === "checkout") renderCheckoutSummary();
+}
+
+function toggleAdmin() {
+  adminMode = !adminMode;
+  document.body.classList.toggle("admin-mode", adminMode);
+  document.getElementById("adminBar").classList.toggle("show", adminMode);
+  document.getElementById("adminTabs").classList.toggle("show", adminMode);
+  if (!adminMode) showView("catalog");
+}
+
+function showAdminTab(tab, btn) {
+  document.querySelectorAll(".admin-tab").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  if (tab === "catalog") { showView("catalog"); return; }
+  if (tab === "orders") { showView("orders"); loadOrders(); return; }
+  if (tab === "financial") { showView("financial"); loadFinancial(); return; }
+  if (tab === "inventory") { showView("inventory"); loadInventory(); return; }
+}
+
+// ── Category Nav ──
+function filterCategory(cat, btn) {
+  currentCategory = cat;
+  document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+  if (btn) btn.classList.add("active");
+  renderProducts();
+}
+
+function getPrice(p) { return currency === "mxn" ? p.retail_price_mxn : p.retail_price_usd; }
+function ps() { return "$"; }
+function psfx() { return currency === "mxn" ? " MXN" : " USD"; }
+
+// ── Cart ──
+function saveCart() {
+  localStorage.setItem("dy_cart", JSON.stringify(CART));
+  updateCartCount();
+}
+
+function updateCartCount() {
+  const n = CART.reduce((s, i) => s + i.qty, 0);
+  document.getElementById("cartCount").textContent = n || "";
+}
+
+function addToCart(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  const existing = CART.find(x => x.id === id);
+  if (existing) { existing.qty++; }
+  else { CART.push({ id: p.id, name: p.name, price_usd: p.retail_price_usd, price_mxn: p.retail_price_mxn, has_image: p.has_image, qty: 1 }); }
+  saveCart();
+  renderCart();
+  showToast(t("added_to_cart"));
+}
+
+function removeFromCart(id) {
+  CART = CART.filter(x => x.id !== id);
+  saveCart();
+  renderCart();
+}
+
+function updateQty(id, delta) {
+  const item = CART.find(x => x.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) { removeFromCart(id); return; }
+  saveCart();
+  renderCart();
+}
+
+function clearCart() {
+  CART = [];
+  saveCart();
+  renderCart();
+}
+
+function getCartTotal() {
+  return CART.reduce((s, i) => s + (currency === "mxn" ? i.price_mxn : i.price_usd) * i.qty, 0);
+}
+
+function toggleCart() {
+  document.getElementById("cartOverlay").classList.toggle("open");
+  document.getElementById("cartDrawer").classList.toggle("open");
+  renderCart();
+}
+
+function renderCart() {
+  const container = document.getElementById("cartItems");
+  if (!CART.length) {
+    container.innerHTML = `<div class="cart-empty">${t("cart_empty")}</div>`;
+    document.getElementById("cartTotal").textContent = "$0.00";
+    document.getElementById("cartCheckoutBtn").disabled = true;
+    return;
+  }
+  document.getElementById("cartCheckoutBtn").disabled = false;
+  let html = "";
+  CART.forEach(item => {
+    const price = currency === "mxn" ? item.price_mxn : item.price_usd;
+    const imgHtml = item.has_image ? `<img src="/api/images/${item.id}" alt="">` : `<span style="font-size:10px;color:var(--gray)">No img</span>`;
+    html += `<div class="cart-item">
+      <div class="cart-item-img">${imgHtml}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">${ps()}${(price * item.qty).toFixed(2)}${psfx()}</div>
+      </div>
+      <div class="cart-item-qty">
+        <button class="qty-btn" onclick="updateQty(${item.id},-1)">-</button>
+        <span class="qty-val">${item.qty}</span>
+        <button class="qty-btn" onclick="updateQty(${item.id},1)">+</button>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart(${item.id})">&#10005;</button>
+    </div>`;
+  });
+  container.innerHTML = html;
+  document.getElementById("cartTotal").textContent = `${ps()}${getCartTotal().toFixed(2)}${psfx()}`;
+}
+
+// ── Checkout ──
+function goToCheckout() {
+  if (!CART.length) return;
+  toggleCart();
+  showView("checkout");
+  document.getElementById("checkoutForm").style.display = "";
+  document.getElementById("orderSuccess").style.display = "none";
+}
+
+function renderCheckoutSummary() {
+  const el = document.getElementById("checkoutSummary");
+  let html = `<h3>${t("order_summary")} (${CART.reduce((s,i)=>s+i.qty,0)} ${t("items")})</h3>`;
+  CART.forEach(item => {
+    const price = currency === "mxn" ? item.price_mxn : item.price_usd;
+    html += `<div class="checkout-item"><span>${item.name} x${item.qty}</span><span>${ps()}${(price*item.qty).toFixed(2)}</span></div>`;
+  });
+  html += `<div class="checkout-total-row"><span>${t("total")}</span><span>${ps()}${getCartTotal().toFixed(2)}${psfx()}</span></div>`;
+  el.innerHTML = html;
+}
+
+function selectPayment(method, el) {
+  selectedPayment = method;
+  document.querySelectorAll(".payment-option").forEach(o => o.classList.remove("selected"));
+  el.classList.add("selected");
+}
+
+async function submitOrder() {
+  const name = document.getElementById("coName").value.trim();
+  const phone = document.getElementById("coPhone").value.trim();
+  if (!name || !phone) { alert(lang==="es" ? "Nombre y telefono son obligatorios" : "Name and phone are required"); return; }
+  if (!CART.length) return;
+
+  const btn = document.querySelector(".checkout-submit");
+  btn.disabled = true;
+  btn.textContent = "...";
+
+  const items = CART.map(i => ({
+    product_id: i.id, product_name: i.name,
+    quantity: i.qty, price_usd: i.price_usd, price_mxn: i.price_mxn
+  }));
+
+  try {
+    const resp = await fetch("/api/orders", {
+      method: "POST", headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({
+        customer_name: name, phone: phone,
+        address: document.getElementById("coAddress").value.trim(),
+        notes: document.getElementById("coNotes").value.trim(),
+        payment_method: selectedPayment, items: items
+      })
+    });
+    const data = await resp.json();
+    if (data.ok) {
+      document.getElementById("checkoutForm").style.display = "none";
+      document.getElementById("orderSuccess").style.display = "";
+      document.getElementById("orderNum").textContent = "#" + data.order_id;
+      document.getElementById("orderPaymentMsg").textContent =
+        selectedPayment === "pay_on_delivery" ? t("pay_on_delivery_msg") : t("bank_transfer_msg");
+      CART = [];
+      saveCart();
+      renderCart();
+    } else {
+      alert(data.error || "Order failed");
+    }
+  } catch(e) { alert("Order failed: " + e.message); }
+  btn.disabled = false;
+  btn.textContent = t("place_order");
+}
+
+// ── Products ──
+function renderProducts() {
+  let filtered = PRODUCTS;
+  if (currentCategory !== "all") filtered = filtered.filter(p => p.category === currentCategory);
+  if (searchTerm) filtered = filtered.filter(p =>
+    (p.name||"").toLowerCase().includes(searchTerm) ||
+    (p.hebrew_name||"").includes(searchTerm) ||
+    (p.spanish_name||"").toLowerCase().includes(searchTerm) ||
+    (p.category||"").toLowerCase().includes(searchTerm) ||
+    (p.upc||"").includes(searchTerm)
+  );
+
+  const container = document.getElementById("catalog");
+  if (!filtered.length) { container.innerHTML = `<div class="no-results">${t("no_results")}</div>`; return; }
+
+  const grouped = {};
+  filtered.forEach(p => { const cat = p.category || "General"; if (!grouped[cat]) grouped[cat] = []; grouped[cat].push(p); });
+
+  let html = "";
+  Object.keys(grouped).sort().forEach(cat => {
+    html += `<h2 class="section-title">${cat}<span class="count-badge">${grouped[cat].length}</span></h2><div class="grid">`;
+    grouped[cat].forEach(p => {
+      const price = getPrice(p);
+      const imgHtml = p.has_image ? `<img src="/api/images/${p.id}" alt="${p.name}" loading="lazy">` : `<div class="no-img">No Image</div>`;
+      const displayName = lang === "es" && p.spanish_name ? p.spanish_name : p.name;
+      const inCart = CART.some(c => c.id === p.id);
+      const cartBtnClass = inCart ? "card-cart-btn added" : "card-cart-btn";
+      const cartBtnText = inCart ? t("in_cart") : t("add_cart");
+      const safeName = (p.name||"").replace(/'/g,"\\'").replace(/"/g,"&quot;");
+
+      html += `<div class="card">
+        <button class="card-del" onclick="deleteProduct(${p.id},'${safeName}')">x</button>
+        <span class="card-badge">${p.category}</span>
+        <div class="card-img">${imgHtml}</div>
+        <div class="card-body">
+          <div class="card-hebrew">${p.hebrew_name||''}</div>
+          <div class="card-name">${displayName}</div>
+          <div class="card-meta"><span class="card-size">${p.size||''}</span><span>${t("upc")}: ${p.upc||'N/A'}</span></div>
+        </div>
+        <div class="card-footer">
+          <span class="card-price" onclick="openPriceEdit(${p.id},'${safeName}',${p.retail_price_usd})">${ps()}${price.toFixed(2)}</span>
+          <button class="${cartBtnClass}" onclick="addToCart(${p.id})">&#128722; ${cartBtnText}</button>
+        </div>
+      </div>`;
+    });
+    html += "</div>";
+  });
+  container.innerHTML = html;
+}
+
+// ── Admin: Orders ──
+async function loadOrders() {
+  const resp = await fetch("/api/orders");
+  const orders = await resp.json();
+  const el = document.getElementById("ordersList");
+  if (!orders.length) { el.innerHTML = `<div class="no-results">No orders yet</div>`; return; }
+  let html = "";
+  orders.forEach(o => {
+    const statusClass = "status-" + o.status;
+    html += `<div class="order-card">
+      <div class="order-header">
+        <span class="order-id">Order #${o.id}</span>
+        <span class="order-status ${statusClass}">${o.status}</span>
+      </div>
+      <div class="order-detail"><strong>${t("name")}:</strong> ${o.customer_name} | <strong>${t("phone")}:</strong> ${o.phone}</div>
+      ${o.address ? `<div class="order-detail"><strong>${t("address")}:</strong> ${o.address}</div>` : ""}
+      <div class="order-detail"><strong>${t("payment")}:</strong> ${o.payment_method.replace(/_/g," ")} | <strong>${t("date")}:</strong> ${o.created_at.slice(0,16)}</div>
+      <div class="order-items-list">${o.items.map(i => `${i.product_name} x${i.quantity} = $${(i.price_usd*i.quantity).toFixed(2)}`).join("<br>")}</div>
+      <div class="order-detail" style="font-weight:700;font-size:14px">${t("total")}: $${o.total_usd.toFixed(2)} USD / $${o.total_mxn.toFixed(2)} MXN</div>
+      <div class="order-actions">
+        <select onchange="changeOrderStatus(${o.id},this.value)">
+          <option value="pending" ${o.status==="pending"?"selected":""}>Pending</option>
+          <option value="confirmed" ${o.status==="confirmed"?"selected":""}>Confirmed</option>
+          <option value="delivered" ${o.status==="delivered"?"selected":""}>Delivered</option>
+          <option value="cancelled" ${o.status==="cancelled"?"selected":""}>Cancelled</option>
+        </select>
+      </div>
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+
+async function changeOrderStatus(id, status) {
+  await fetch(`/api/orders/${id}`, { method:"PUT", headers:{"Content-Type":"application/json"}, body:JSON.stringify({status}) });
+  loadOrders();
+}
+
+// ── Admin: Financial ──
+async function loadFinancial() {
+  const [finResp, invResp] = await Promise.all([fetch("/api/financial"), fetch("/api/invoices")]);
+  const fin = await finResp.json();
+  const invoices = await invResp.json();
+
+  const profitClass = fin.profit_usd >= 0 ? "positive" : "negative";
+  document.getElementById("finCards").innerHTML = `
+    <div class="fin-card"><div class="fin-card-label">${t("revenue")}</div><div class="fin-card-value">$${fin.revenue_usd.toFixed(2)}</div></div>
+    <div class="fin-card"><div class="fin-card-label">${t("costs")}</div><div class="fin-card-value">$${fin.total_costs.toFixed(2)}</div></div>
+    <div class="fin-card"><div class="fin-card-label">${t("profit")}</div><div class="fin-card-value ${profitClass}">$${fin.profit_usd.toFixed(2)}</div></div>
+    <div class="fin-card"><div class="fin-card-label">${t("total_orders")}</div><div class="fin-card-value">${fin.total_orders}</div></div>
+    <div class="fin-card"><div class="fin-card-label">${t("pending_orders")}</div><div class="fin-card-value">${fin.pending_orders}</div></div>
+    <div class="fin-card"><div class="fin-card-label">${t("inventory_value")}</div><div class="fin-card-value">$${fin.inventory_value_usd.toFixed(2)}</div></div>
+  `;
+
+  let invHtml = "";
+  if (invoices.length) {
+    invHtml = `<table class="data-table"><tr><th>${t("vendor")}</th><th>${t("invoice_num")}</th><th>${t("date")}</th><th>${t("amount")}</th><th>${t("file")}</th><th></th></tr>`;
+    invoices.forEach(inv => {
+      const fileLink = inv.file_name ? `<a href="/api/invoices/${inv.id}/file" target="_blank" class="btn btn-sm btn-outline">${t("view")}</a>` : "-";
+      invHtml += `<tr><td>${inv.vendor}</td><td>${inv.invoice_number}</td><td>${inv.invoice_date}</td><td>$${inv.total_amount.toFixed(2)} ${inv.currency}</td><td>${fileLink}</td>
+        <td><button class="btn btn-sm btn-red" onclick="delInvoice(${inv.id})">x</button></td></tr>`;
+    });
+    invHtml += "</table>";
+  } else { invHtml = `<div class="no-results">No invoices yet</div>`; }
+  document.getElementById("invoicesList").innerHTML = invHtml;
+}
+
+async function uploadInvoice() {
+  const vendor = document.getElementById("invVendor").value.trim();
+  if (!vendor) { alert("Vendor required"); return; }
+  const fd = new FormData();
+  fd.append("vendor", vendor);
+  fd.append("invoice_number", document.getElementById("invNumber").value);
+  fd.append("invoice_date", document.getElementById("invDate").value);
+  fd.append("total_amount", document.getElementById("invAmount").value || 0);
+  fd.append("currency", document.getElementById("invCurrency").value);
+  const fileInput = document.getElementById("invFile");
+  if (fileInput.files.length) fd.append("file", fileInput.files[0]);
+  await fetch("/api/invoices", { method:"POST", body: fd });
+  document.getElementById("invVendor").value = "";
+  document.getElementById("invNumber").value = "";
+  document.getElementById("invDate").value = "";
+  document.getElementById("invAmount").value = "";
+  fileInput.value = "";
+  loadFinancial();
+}
+
+async function delInvoice(id) {
+  if (!confirm("Delete this invoice?")) return;
+  await fetch(`/api/invoices/${id}`, { method:"DELETE" });
+  loadFinancial();
+}
+
+// ── Admin: Inventory ──
+async function loadInventory() {
+  const resp = await fetch("/api/inventory");
+  const items = await resp.json();
+  let html = `<div style="overflow-x:auto"><table class="data-table">
+    <tr><th>${t("product")}</th><th>Category</th><th>Unit Cost</th><th>Retail</th><th>${t("stock")}</th><th>${t("reorder")}</th><th>${t("action")}</th></tr>`;
+  items.forEach(item => {
+    const lowClass = item.qty_on_hand <= item.reorder_point ? "low-stock" : "";
+    html += `<tr>
+      <td>${item.name}</td><td>${item.category}</td>
+      <td>$${item.unit_cost.toFixed(2)}</td><td>$${item.retail_price_usd.toFixed(2)}</td>
+      <td class="${lowClass}"><input class="inv-input" id="inv_qty_${item.product_id}" value="${item.qty_on_hand}" type="number" min="0"></td>
+      <td><input class="inv-input" id="inv_rp_${item.product_id}" value="${item.reorder_point}" type="number" min="0"></td>
+      <td><button class="btn btn-sm btn-gold" onclick="saveInventory(${item.product_id})">${t("update")}</button></td>
+    </tr>`;
+  });
+  html += "</table></div>";
+  document.getElementById("inventoryTable").innerHTML = html;
+}
+
+async function saveInventory(pid) {
+  const qty = parseInt(document.getElementById("inv_qty_"+pid).value) || 0;
+  const rp = parseInt(document.getElementById("inv_rp_"+pid).value) || 5;
+  await fetch(`/api/inventory/${pid}`, { method:"PUT", headers:{"Content-Type":"application/json"}, body:JSON.stringify({qty_on_hand:qty, reorder_point:rp}) });
+  showToast("Updated!");
+}
+
+// ── Existing functions ──
+function openPriceEdit(id, name, priceUsd) {
+  if (!adminMode) return;
+  editingId = id;
+  document.getElementById("editProductName").textContent = name;
+  document.getElementById("editPriceInput").value = priceUsd.toFixed(2);
+  updateMxnPreview();
+  document.getElementById("priceModal").classList.add("show");
+  document.getElementById("editPriceInput").focus();
+}
+
+function updateMxnPreview() {
+  const usd = parseFloat(document.getElementById("editPriceInput").value) || 0;
+  document.getElementById("editMxnPreview").textContent = `= $${(usd * exchangeRate).toFixed(2)} MXN`;
+}
+
+function closeModal() { document.getElementById("priceModal").classList.remove("show"); editingId = null; }
+
+async function savePrice() {
+  const usd = parseFloat(document.getElementById("editPriceInput").value);
+  if (!editingId || isNaN(usd)) return;
+  const resp = await fetch(`/api/products/${editingId}`, { method:"PUT", headers:{"Content-Type":"application/json"}, body:JSON.stringify({retail_price_usd:usd}) });
+  const data = await resp.json();
+  if (data.ok) {
+    const p = PRODUCTS.find(p => p.id === editingId);
+    if (p) { p.retail_price_usd = data.retail_price_usd; p.retail_price_mxn = data.retail_price_mxn; }
+    renderProducts();
+  }
+  closeModal();
+}
+
+async function deleteProduct(id, name) {
+  if (!confirm(t("confirm_delete") + "\n" + name)) return;
+  await fetch(`/api/products/${id}`, {method:"DELETE"});
+  PRODUCTS = PRODUCTS.filter(p => p.id !== id);
+  renderProducts();
+  loadStats();
+}
+
+async function uploadFile() {
+  const input = document.getElementById("fileInput");
+  if (!input.files.length) return;
+  const status = document.getElementById("uploadStatus");
+  status.textContent = t("uploading");
+  const fd = new FormData();
+  fd.append("file", input.files[0]);
+  try {
+    const resp = await fetch("/api/upload", {method:"POST", body:fd});
+    const data = await resp.json();
+    if (data.error) { status.textContent = data.error; return; }
+    status.textContent = `${data.added} ${t("upload_done")}`;
+    input.value = "";
+    await loadProducts();
+    loadStats();
+  } catch(e) { status.textContent = "Upload failed"; }
+}
+
+async function loadProducts() {
+  const resp = await fetch("/api/products");
+  PRODUCTS = await resp.json();
+  buildNav();
+  renderProducts();
+}
+
+async function loadStats() {
+  const resp = await fetch("/api/stats");
+  const s = await resp.json();
+  document.getElementById("statProducts").textContent = s.total;
+  document.getElementById("statCategories").textContent = s.categories;
+  document.getElementById("statBrands").textContent = s.brands;
+  exchangeRate = s.exchange_rate || 18;
+  if (s.whatsapp) {
+    waLink = `https://wa.me/${s.whatsapp.replace(/[+ ]/g,"")}`;
+  }
+}
+
+function buildNav() {
+  const cats = [...new Set(PRODUCTS.map(p => p.category))].sort();
+  const nav = document.getElementById("navCategories");
+  nav.innerHTML = `<button class="nav-btn active" onclick="filterCategory('all',this)">${t("all_products")}</button>`;
+  cats.forEach(c => {
+    const btn = document.createElement("button");
+    btn.className = "nav-btn";
+    btn.textContent = c;
+    btn.onclick = function() { filterCategory(c, this); };
+    nav.appendChild(btn);
+  });
+}
+
+document.getElementById("searchInput").addEventListener("input", e => { searchTerm = e.target.value.toLowerCase(); renderProducts(); });
+document.getElementById("editPriceInput").addEventListener("input", updateMxnPreview);
+document.getElementById("priceModal").addEventListener("click", e => { if (e.target === e.currentTarget) closeModal(); });
+
+updateCartCount();
+loadProducts();
+loadStats();
+applyI18n();
+</script>
+</body>
+</html>

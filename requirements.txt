@@ -7,3 +7,7 @@ Pillow
 deep-translator
 python-dotenv
 python-bidi
+flask
+flask-cors
+psycopg2-binary
+gunicorn
