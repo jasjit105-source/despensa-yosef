@@ -24,6 +24,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .header .logo { color: var(--gold); font-size: 1.4em; font-weight: 800; letter-spacing: 2px; }
 .header .logo small { display:block; color:rgba(255,255,255,.6); font-size:.45em; font-weight:400; letter-spacing:1px; }
 .header-right { display:flex; gap:10px; align-items:center; }
+.lang-btn {
+  background: rgba(255,255,255,.15); color: var(--gold); border:1px solid var(--gold);
+  border-radius:16px; padding:5px 12px; font-size:.75em; font-weight:700;
+  cursor:pointer; transition: all .2s; white-space:nowrap;
+}
+.lang-btn:hover { background: rgba(212,175,55,.2); }
 .cart-btn {
   background: var(--gold); color: var(--green); border:none; border-radius:50%;
   width:44px; height:44px; font-size:1.3em; cursor:pointer; position:relative;
@@ -215,16 +221,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 
 <!-- HEADER -->
 <div class="header">
-  <div class="logo">DESPENSA YOSEF<small>PREMIUM KOSHER GROCERY</small></div>
+  <div class="logo">DESPENSA YOSEF<small data-i18n="subtitle">ABARROTES KOSHER PREMIUM</small></div>
   <div class="header-right">
-    <input class="search-box" type="text" placeholder="Buscar..." oninput="filterProducts(this.value)">
-    <button class="cart-btn" onclick="toggleCart()">🛒<span class="badge" id="cart-badge">0</span></button>
+    <button class="lang-btn" id="lang-toggle" onclick="toggleLang()">ENGLISH</button>
+    <input class="search-box" type="text" id="search-input" data-i18n-placeholder="search_placeholder" placeholder="Buscar producto..." oninput="filterProducts(this.value)">
+    <button class="cart-btn" onclick="toggleCart()">&#x1F6D2;<span class="badge" id="cart-badge">0</span></button>
   </div>
 </div>
 
 <!-- NAV -->
 <div class="nav" id="nav">
-  <a href="#" onclick="filterCat('all',this);return false" class="active">Todos</a>
+  <a href="#" onclick="filterCat('all',this);return false" class="active" data-i18n="nav_all">Todos</a>
   <a href="#" onclick="filterCat('Baking & Cooking',this);return false">Baking & Cooking</a>
   <a href="#" onclick="filterCat('Candy & Chocolate',this);return false">Candy & Chocolate</a>
   <a href="#" onclick="filterCat('Canned & Jarred',this);return false">Canned & Jarred</a>
@@ -240,13 +247,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 
 <!-- HERO -->
 <div class="hero">
-  <h2>✡ Despensa Yosef ✡</h2>
-  <p>Productos Kosher Premium</p>
+  <h2>&#x2721; Despensa Yosef &#x2721;</h2>
+  <p data-i18n="hero_tagline">Productos Kosher Premium — Entrega a Domicilio</p>
   <div class="stats">
-    <div><div class="sn">228</div><div class="sl">Productos</div></div>
-    <div><div class="sn">11</div><div class="sl">Categorias</div></div>
+    <div><div class="sn">228</div><div class="sl" data-i18n="stat_products">Productos</div></div>
+    <div><div class="sn">11</div><div class="sl" data-i18n="stat_categories">Categorias</div></div>
   </div>
-  <div class="free-del">🚚 ENVIO GRATIS / FREE DELIVERY</div>
+  <div class="free-del" data-i18n="free_delivery">&#x1F69A; ENVIO GRATIS EN TODOS LOS PEDIDOS</div>
 </div>
 
 <!-- PRODUCTS -->
@@ -262,7 +269,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">ELITE | 2.3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$51.30 MXN <small>($2.85 USD)</small></div>
-          <button class="add-btn" id="btn-21" onclick="addToCart(21,'ELITE MUST SUGAR FREE REFRESHING MINT GUM',2.85,51.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-21" onclick="addToCart(21,'ELITE MUST SUGAR FREE REFRESHING MINT GUM',2.85,51.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -274,31 +281,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">ELITE | 2.3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$51.30 MXN <small>($2.85 USD)</small></div>
-          <button class="add-btn" id="btn-22" onclick="addToCart(22,'ELITE MUST SUGAR FREE SPEARMINT GUM',2.85,51.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-22" onclick="addToCart(22,'ELITE MUST SUGAR FREE SPEARMINT GUM',2.85,51.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Baking & Cooking" data-name="elite sugar free bazooka cubes - in a cup" data-id="24">
-      <div class="card-img" id="img-24"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-24"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>קוביות בזוקה ללא סוכר עלית - בגביע</div>
         <div class="card-name">ELITE SUGAR FREE BAZOOKA CUBES - IN A CUP</div>
         <div class="card-meta">ELITE | 2 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$27.54 MXN <small>($1.53 USD)</small></div>
-          <button class="add-btn" id="btn-24" onclick="addToCart(24,'ELITE SUGAR FREE BAZOOKA CUBES - IN A CUP',1.53,27.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-24" onclick="addToCart(24,'ELITE SUGAR FREE BAZOOKA CUBES - IN A CUP',1.53,27.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Baking & Cooking" data-name="elite sugar free grape gum cubes - in a cup" data-id="27">
-      <div class="card-img" id="img-27"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-27"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>קוביות מסטיק ענבים ללא סוכר עלית - בכוס</div>
         <div class="card-name">ELITE SUGAR FREE GRAPE GUM CUBES - IN A CUP</div>
         <div class="card-meta">ELITE | 2 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$27.54 MXN <small>($1.53 USD)</small></div>
-          <button class="add-btn" id="btn-27" onclick="addToCart(27,'ELITE SUGAR FREE GRAPE GUM CUBES - IN A CUP',1.53,27.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-27" onclick="addToCart(27,'ELITE SUGAR FREE GRAPE GUM CUBES - IN A CUP',1.53,27.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -310,7 +317,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">ELITE | 2 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$27.54 MXN <small>($1.53 USD)</small></div>
-          <button class="add-btn" id="btn-25" onclick="addToCart(25,'ELITE SUGAR FREE PEPPERMINT CUBES - IN A CUP',1.53,27.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-25" onclick="addToCart(25,'ELITE SUGAR FREE PEPPERMINT CUBES - IN A CUP',1.53,27.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -322,31 +329,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">ELITE | 2 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$27.54 MXN <small>($1.53 USD)</small></div>
-          <button class="add-btn" id="btn-26" onclick="addToCart(26,'ELITE SUGAR FREE SPEARMINT CUBES - IN A CUP',1.53,27.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-26" onclick="addToCart(26,'ELITE SUGAR FREE SPEARMINT CUBES - IN A CUP',1.53,27.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Baking & Cooking" data-name="gefen sugar ice cream cones" data-id="68">
-      <div class="card-img" id="img-68"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-68"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>גביעי גלידת סוכר GEFEN</div>
         <div class="card-name">GEFEN SUGAR ICE CREAM CONES</div>
         <div class="card-meta">GEFEN | 4.6 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$54.18 MXN <small>($3.01 USD)</small></div>
-          <button class="add-btn" id="btn-68" onclick="addToCart(68,'GEFEN SUGAR ICE CREAM CONES',3.01,54.18)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-68" onclick="addToCart(68,'GEFEN SUGAR ICE CREAM CONES',3.01,54.18)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Baking & Cooking" data-name="pereg paprika sweet red with oil" data-id="124">
-      <div class="card-img" id="img-124"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-124"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>PEREG PAPRIKA אדום מתוק עם שמן</div>
         <div class="card-name">PEREG PAPRIKA SWEET RED WITH OIL</div>
         <div class="card-meta">PEREG | 4.25 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$97.56 MXN <small>($5.42 USD)</small></div>
-          <button class="add-btn" id="btn-124" onclick="addToCart(124,'PEREG PAPRIKA SWEET RED WITH OIL',5.42,97.56)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-124" onclick="addToCart(124,'PEREG PAPRIKA SWEET RED WITH OIL',5.42,97.56)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -356,14 +363,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   <h2 class="cat-title">Candy & Chocolate <span class="cat-count">49</span></h2>
   <div class="grid">
     <div class="card" data-cat="Candy & Chocolate" data-name="elite big bite pesek zman" data-id="28">
-      <div class="card-img" id="img-28"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-28"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>ELITE BIG BITE PESEK ZMAN</div>
         <div class="card-name">ELITE BIG BITE PESEK ZMAN</div>
         <div class="card-meta">ELITE | 1.83 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$12.42 MXN <small>($0.69 USD)</small></div>
-          <button class="add-btn" id="btn-28" onclick="addToCart(28,'ELITE BIG BITE PESEK ZMAN',0.69,12.42)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-28" onclick="addToCart(28,'ELITE BIG BITE PESEK ZMAN',0.69,12.42)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -375,55 +382,55 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">ELITE | 1.59 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$12.42 MXN <small>($0.69 USD)</small></div>
-          <button class="add-btn" id="btn-29" onclick="addToCart(29,'ELITE CLASSIC PESEK ZMAN',0.69,12.42)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-29" onclick="addToCart(29,'ELITE CLASSIC PESEK ZMAN',0.69,12.42)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="elite milk chocolate bar" data-id="30">
-      <div class="card-img" id="img-30"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-30"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>חפיסת שוקולד חלב עלית</div>
         <div class="card-name">ELITE MILK CHOCOLATE BAR</div>
         <div class="card-meta">ELITE | 3.5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$45.90 MXN <small>($2.55 USD)</small></div>
-          <button class="add-btn" id="btn-30" onclick="addToCart(30,'ELITE MILK CHOCOLATE BAR',2.55,45.9)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-30" onclick="addToCart(30,'ELITE MILK CHOCOLATE BAR',2.55,45.9)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="fruzips duo cherry/apple" data-id="173">
-      <div class="card-img" id="img-173"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-173"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Fruzips Duo דובדבן/תפוח</div>
         <div class="card-name">Fruzips Duo Cherry/Apple</div>
         <div class="card-meta">Fruzips | 12/24x.7 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$5.94 MXN <small>($0.33 USD)</small></div>
-          <button class="add-btn" id="btn-173" onclick="addToCart(173,'Fruzips Duo Cherry/Apple',0.33,5.94)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-173" onclick="addToCart(173,'Fruzips Duo Cherry/Apple',0.33,5.94)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="fruzips duo stawberry/lemon" data-id="172">
-      <div class="card-img" id="img-172"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-172"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Fruzips Duo תותים/לימון</div>
         <div class="card-name">Fruzips Duo Stawberry/Lemon</div>
         <div class="card-meta">Fruzips | 12/24x.7 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$5.94 MXN <small>($0.33 USD)</small></div>
-          <button class="add-btn" id="btn-172" onclick="addToCart(172,'Fruzips Duo Stawberry/Lemon',0.33,5.94)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-172" onclick="addToCart(172,'Fruzips Duo Stawberry/Lemon',0.33,5.94)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="fruzips strawberry" data-id="171">
-      <div class="card-img" id="img-171"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-171"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Fruzips תות</div>
         <div class="card-name">Fruzips Strawberry</div>
         <div class="card-meta">Fruzips | 12/24x.7 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$5.94 MXN <small>($0.33 USD)</small></div>
-          <button class="add-btn" id="btn-171" onclick="addToCart(171,'Fruzips Strawberry',0.33,5.94)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-171" onclick="addToCart(171,'Fruzips Strawberry',0.33,5.94)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -435,19 +442,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 22 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$72.18 MXN <small>($4.01 USD)</small></div>
-          <button class="add-btn" id="btn-45" onclick="addToCart(45,'GEFEN CHOCOLATE SYRUP KP',4.01,72.18)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-45" onclick="addToCart(45,'GEFEN CHOCOLATE SYRUP KP',4.01,72.18)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="klik choko-kid bar" data-id="189">
-      <div class="card-img" id="img-189"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-189"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>לחץ על Choko-Kid Bar</div>
         <div class="card-name">Klik Choko-Kid Bar</div>
         <div class="card-meta">Klik | 6/24x 1.34oz</div>
         <div class="card-bottom">
           <div class="card-price">$18.36 MXN <small>($1.02 USD)</small></div>
-          <button class="add-btn" id="btn-189" onclick="addToCart(189,'Klik Choko-Kid Bar',1.02,18.36)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-189" onclick="addToCart(189,'Klik Choko-Kid Bar',1.02,18.36)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -459,7 +466,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Klik | 6/16x2.64 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$27.54 MXN <small>($1.53 USD)</small></div>
-          <button class="add-btn" id="btn-192" onclick="addToCart(192,'Klik Cornflakes',1.53,27.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-192" onclick="addToCart(192,'Klik Cornflakes',1.53,27.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -471,7 +478,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Klik | 6/24x1.34oz</div>
         <div class="card-bottom">
           <div class="card-price">$18.36 MXN <small>($1.02 USD)</small></div>
-          <button class="add-btn" id="btn-188" onclick="addToCart(188,'Klik In Milk Cream Bar (blue)',1.02,18.36)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-188" onclick="addToCart(188,'Klik In Milk Cream Bar (blue)',1.02,18.36)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -483,7 +490,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Klik | 6/24x1.34 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$18.36 MXN <small>($1.02 USD)</small></div>
-          <button class="add-btn" id="btn-187" onclick="addToCart(187,'Klik In Milk Truffle Bar (brown)',1.02,18.36)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-187" onclick="addToCart(187,'Klik In Milk Truffle Bar (brown)',1.02,18.36)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -495,7 +502,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Klik | 6/16x2.6 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$27.54 MXN <small>($1.53 USD)</small></div>
-          <button class="add-btn" id="btn-195" onclick="addToCart(195,'Klik Kariot Chocolada White',1.53,27.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-195" onclick="addToCart(195,'Klik Kariot Chocolada White',1.53,27.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -507,7 +514,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Klik | 12/24x1.23OZ</div>
         <div class="card-bottom">
           <div class="card-price">$9.18 MXN <small>($0.51 USD)</small></div>
-          <button class="add-btn" id="btn-186" onclick="addToCart(186,'Klik La-Hit Original Bar (red)',0.51,9.18)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-186" onclick="addToCart(186,'Klik La-Hit Original Bar (red)',0.51,9.18)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -519,7 +526,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Klik | 6/16x2.64 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$27.54 MXN <small>($1.53 USD)</small></div>
-          <button class="add-btn" id="btn-194" onclick="addToCart(194,'Klik Malt Balls',1.53,27.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-194" onclick="addToCart(194,'Klik Malt Balls',1.53,27.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -531,7 +538,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Klik | 6/16x2.64 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$27.54 MXN <small>($1.53 USD)</small></div>
-          <button class="add-btn" id="btn-191" onclick="addToCart(191,'Klik Party Mix',1.53,27.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-191" onclick="addToCart(191,'Klik Party Mix',1.53,27.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -543,7 +550,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Oodles | 12/24x.56 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$6.30 MXN <small>($0.35 USD)</small></div>
-          <button class="add-btn" id="btn-205" onclick="addToCart(205,'Oodles Dreidel Mix Display',0.35,6.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-205" onclick="addToCart(205,'Oodles Dreidel Mix Display',0.35,6.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -555,31 +562,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Oodles | 12/24x.56 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$6.30 MXN <small>($0.35 USD)</small></div>
-          <button class="add-btn" id="btn-206" onclick="addToCart(206,'Oodles Dreidel Raspberry Display',0.35,6.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-206" onclick="addToCart(206,'Oodles Dreidel Raspberry Display',0.35,6.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="paskesz choc coins box gold milk cholov yisroel" data-id="204">
-      <div class="card-img" id="img-204"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-204"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Paskesz Choc קופסת מטבעות זהב חלב חולוב ישראל</div>
         <div class="card-name">Paskesz Choc Coins Box Gold Milk Cholov Yisroel</div>
         <div class="card-meta">Paskesz | 12/24x.5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$17.64 MXN <small>($0.98 USD)</small></div>
-          <button class="add-btn" id="btn-204" onclick="addToCart(204,'Paskesz Choc Coins Box Gold Milk Cholov Yisroel',0.98,17.64)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-204" onclick="addToCart(204,'Paskesz Choc Coins Box Gold Milk Cholov Yisroel',0.98,17.64)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="shotz peanut butter cups" data-id="202">
-      <div class="card-img" id="img-202"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-202"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>שוץ כוסות חמאת בוטנים</div>
         <div class="card-name">Shotz Peanut Butter Cups</div>
         <div class="card-meta">Shotz | 4/8x4.4 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$75.60 MXN <small>($4.20 USD)</small></div>
-          <button class="add-btn" id="btn-202" onclick="addToCart(202,'Shotz Peanut Butter Cups',4.2,75.6)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-202" onclick="addToCart(202,'Shotz Peanut Butter Cups',4.2,75.6)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -591,7 +598,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Silhouette | 24/2.66 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$47.52 MXN <small>($2.64 USD)</small></div>
-          <button class="add-btn" id="btn-136" onclick="addToCart(136,'Silhouette Choc Lined',2.64,47.52)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-136" onclick="addToCart(136,'Silhouette Choc Lined',2.64,47.52)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -603,7 +610,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Silhouette | 24/3.5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$47.52 MXN <small>($2.64 USD)</small></div>
-          <button class="add-btn" id="btn-137" onclick="addToCart(137,'Silhouette French Truffle',2.64,47.52)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-137" onclick="addToCart(137,'Silhouette French Truffle',2.64,47.52)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -615,55 +622,55 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Silhouette | 24/3.5 oz</div>
         <div class="card-bottom">
           <div class="card-price">$47.52 MXN <small>($2.64 USD)</small></div>
-          <button class="add-btn" id="btn-138" onclick="addToCart(138,'Silhouette Tiramisu',2.64,47.52)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-138" onclick="addToCart(138,'Silhouette Tiramisu',2.64,47.52)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="sm klik cornflakes" data-id="196">
-      <div class="card-img" id="img-196"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-196"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Sm קליק קורנפלקס</div>
         <div class="card-name">Sm Klik Cornflakes</div>
         <div class="card-meta">Sm | 12/24x1.06 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$14.58 MXN <small>($0.81 USD)</small></div>
-          <button class="add-btn" id="btn-196" onclick="addToCart(196,'Sm Klik Cornflakes',0.81,14.58)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-196" onclick="addToCart(196,'Sm Klik Cornflakes',0.81,14.58)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="sm klik kariot" data-id="198">
-      <div class="card-img" id="img-198"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-198"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>סם קליק קריות</div>
         <div class="card-name">Sm Klik Kariot</div>
         <div class="card-meta">Sm | 12/24x1.06 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$14.58 MXN <small>($0.81 USD)</small></div>
-          <button class="add-btn" id="btn-198" onclick="addToCart(198,'Sm Klik Kariot',0.81,14.58)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-198" onclick="addToCart(198,'Sm Klik Kariot',0.81,14.58)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="sm klik malt balls" data-id="197">
-      <div class="card-img" id="img-197"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-197"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Sm Click Malt Balls</div>
         <div class="card-name">Sm Klik Malt Balls</div>
         <div class="card-meta">Sm | 12/24x1.06 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$14.58 MXN <small>($0.81 USD)</small></div>
-          <button class="add-btn" id="btn-197" onclick="addToCart(197,'Sm Klik Malt Balls',0.81,14.58)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-197" onclick="addToCart(197,'Sm Klik Malt Balls',0.81,14.58)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="solos caramel bites" data-id="201">
-      <div class="card-img" id="img-201"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-201"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>סולו ביס קרמל</div>
         <div class="card-name">Solos Caramel Bites</div>
         <div class="card-meta">Solos | 4/10x5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$70.38 MXN <small>($3.91 USD)</small></div>
-          <button class="add-btn" id="btn-201" onclick="addToCart(201,'Solos Caramel Bites',3.91,70.38)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-201" onclick="addToCart(201,'Solos Caramel Bites',3.91,70.38)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -675,19 +682,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Sour | 6/24x1.75 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$12.24 MXN <small>($0.68 USD)</small></div>
-          <button class="add-btn" id="btn-155" onclick="addToCart(155,'Sour Sticks Apple',0.68,12.24)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-155" onclick="addToCart(155,'Sour Sticks Apple',0.68,12.24)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="sour sticks forest berry" data-id="157">
-      <div class="card-img" id="img-157"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-157"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Sour Sticks Forest Berry</div>
         <div class="card-name">Sour Sticks Forest Berry</div>
         <div class="card-meta">Sour | 6/24x1.75 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$12.24 MXN <small>($0.68 USD)</small></div>
-          <button class="add-btn" id="btn-157" onclick="addToCart(157,'Sour Sticks Forest Berry',0.68,12.24)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-157" onclick="addToCart(157,'Sour Sticks Forest Berry',0.68,12.24)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -699,7 +706,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Sour | 6/24x1.75 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$12.24 MXN <small>($0.68 USD)</small></div>
-          <button class="add-btn" id="btn-156" onclick="addToCart(156,'Sour Sticks Mix',0.68,12.24)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-156" onclick="addToCart(156,'Sour Sticks Mix',0.68,12.24)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -711,7 +718,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Sour | 6/24x1.75 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$12.24 MXN <small>($0.68 USD)</small></div>
-          <button class="add-btn" id="btn-159" onclick="addToCart(159,'Sour Sticks Pink Lemonade',0.68,12.24)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-159" onclick="addToCart(159,'Sour Sticks Pink Lemonade',0.68,12.24)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -723,19 +730,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Sour | 6/24x1.75 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$12.24 MXN <small>($0.68 USD)</small></div>
-          <button class="add-btn" id="btn-154" onclick="addToCart(154,'Sour Sticks Raspberry',0.68,12.24)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-154" onclick="addToCart(154,'Sour Sticks Raspberry',0.68,12.24)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="sour sticks strawberry" data-id="153">
-      <div class="card-img" id="img-153"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-153"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Sour Sticks תות</div>
         <div class="card-name">Sour Sticks Strawberry</div>
         <div class="card-meta">Sour | 6/24x1.75 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$12.24 MXN <small>($0.68 USD)</small></div>
-          <button class="add-btn" id="btn-153" onclick="addToCart(153,'Sour Sticks Strawberry',0.68,12.24)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-153" onclick="addToCart(153,'Sour Sticks Strawberry',0.68,12.24)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -747,7 +754,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Sour | 6/24x1.75 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$12.24 MXN <small>($0.68 USD)</small></div>
-          <button class="add-btn" id="btn-158" onclick="addToCart(158,'Sour Sticks Wild Cherry',0.68,12.24)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-158" onclick="addToCart(158,'Sour Sticks Wild Cherry',0.68,12.24)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -759,7 +766,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Super | 24/1.6 oz</div>
         <div class="card-bottom">
           <div class="card-price">$43.92 MXN <small>($2.44 USD)</small></div>
-          <button class="add-btn" id="btn-207" onclick="addToCart(207,'Super Dreidel Treats *B\'datz',2.44,43.92)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-207" onclick="addToCart(207,'Super Dreidel Treats *B\'datz',2.44,43.92)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -771,31 +778,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">TELMA | 24.2 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$167.22 MXN <small>($9.29 USD)</small></div>
-          <button class="add-btn" id="btn-100" onclick="addToCart(100,'TELMA NOUGAT KARIOT',9.29,167.22)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-100" onclick="addToCart(100,'TELMA NOUGAT KARIOT',9.29,167.22)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="telma nougat kariot small box" data-id="101">
-      <div class="card-img" id="img-101"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-101"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>TELMA NOUGAT KARIOT קופסה קטנה</div>
         <div class="card-name">TELMA NOUGAT KARIOT SMALL BOX</div>
         <div class="card-meta">TELMA | 12.27 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$92.16 MXN <small>($5.12 USD)</small></div>
-          <button class="add-btn" id="btn-101" onclick="addToCart(101,'TELMA NOUGAT KARIOT SMALL BOX',5.12,92.16)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-101" onclick="addToCart(101,'TELMA NOUGAT KARIOT SMALL BOX',5.12,92.16)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="tooki dairy white chocolate crunchy granola bars   6ct" data-id="81">
-      <div class="card-img" id="img-81"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-81"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>TOOKI DAIRY שוקולד לבן פריך גרנולה חטיפי 6CT</div>
         <div class="card-name">TOOKI DAIRY WHITE CHOCOLATE CRUNCHY GRANOLA BARS   6CT</div>
         <div class="card-meta">TOOKI | 4.7 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$48.60 MXN <small>($2.70 USD)</small></div>
-          <button class="add-btn" id="btn-81" onclick="addToCart(81,'TOOKI DAIRY WHITE CHOCOLATE CRUNCHY GRANOLA BARS   6CT',2.7,48.6)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-81" onclick="addToCart(81,'TOOKI DAIRY WHITE CHOCOLATE CRUNCHY GRANOLA BARS   6CT',2.7,48.6)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -807,7 +814,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">TOOKI | 4.7 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$48.96 MXN <small>($2.72 USD)</small></div>
-          <button class="add-btn" id="btn-82" onclick="addToCart(82,'TOOKI DARK CHOCOLATE CRUNCHY GRANOLA BARS  6CT',2.72,48.96)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-82" onclick="addToCart(82,'TOOKI DARK CHOCOLATE CRUNCHY GRANOLA BARS  6CT',2.72,48.96)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -819,7 +826,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Trios | 12/15.35 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$51.30 MXN <small>($2.85 USD)</small></div>
-          <button class="add-btn" id="btn-130" onclick="addToCart(130,'Trios Double Filled',2.85,51.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-130" onclick="addToCart(130,'Trios Double Filled',2.85,51.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -831,7 +838,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Trios | 12/15.25 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$51.30 MXN <small>($2.85 USD)</small></div>
-          <button class="add-btn" id="btn-131" onclick="addToCart(131,'Trios Fudge Filled',2.85,51.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-131" onclick="addToCart(131,'Trios Fudge Filled',2.85,51.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -843,7 +850,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Trios | 12/14.3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$51.30 MXN <small>($2.85 USD)</small></div>
-          <button class="add-btn" id="btn-132" onclick="addToCart(132,'Trios Golden',2.85,51.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-132" onclick="addToCart(132,'Trios Golden',2.85,51.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -855,7 +862,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Trios | 12/14.3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$51.30 MXN <small>($2.85 USD)</small></div>
-          <button class="add-btn" id="btn-129" onclick="addToCart(129,'Trios Original',2.85,51.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-129" onclick="addToCart(129,'Trios Original',2.85,51.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -867,79 +874,79 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Wowzers | 6/48x.88 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$5.22 MXN <small>($0.29 USD)</small></div>
-          <button class="add-btn" id="btn-170" onclick="addToCart(170,'Wowzers Apple',0.29,5.22)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-170" onclick="addToCart(170,'Wowzers Apple',0.29,5.22)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="wowzers cherry" data-id="167">
-      <div class="card-img" id="img-167"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-167"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Wowzers Cherry</div>
         <div class="card-name">Wowzers Cherry</div>
         <div class="card-meta">Wowzers | 6/48x.88OZ</div>
         <div class="card-bottom">
           <div class="card-price">$5.22 MXN <small>($0.29 USD)</small></div>
-          <button class="add-btn" id="btn-167" onclick="addToCart(167,'Wowzers Cherry',0.29,5.22)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-167" onclick="addToCart(167,'Wowzers Cherry',0.29,5.22)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="wowzers raspberry" data-id="168">
-      <div class="card-img" id="img-168"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-168"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Wowzers פטל</div>
         <div class="card-name">Wowzers Raspberry</div>
         <div class="card-meta">Wowzers | 6/48x.88 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$5.22 MXN <small>($0.29 USD)</small></div>
-          <button class="add-btn" id="btn-168" onclick="addToCart(168,'Wowzers Raspberry',0.29,5.22)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-168" onclick="addToCart(168,'Wowzers Raspberry',0.29,5.22)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="wowzers strawberry" data-id="169">
-      <div class="card-img" id="img-169"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-169"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Wowzers תות</div>
         <div class="card-name">Wowzers Strawberry</div>
         <div class="card-meta">Wowzers | 6/48x.88 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$5.22 MXN <small>($0.29 USD)</small></div>
-          <button class="add-btn" id="btn-169" onclick="addToCart(169,'Wowzers Strawberry',0.29,5.22)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-169" onclick="addToCart(169,'Wowzers Strawberry',0.29,5.22)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="zillions apple/cherry" data-id="175">
-      <div class="card-img" id="img-175"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-175"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>זיליונות תפוח/דובדבן</div>
         <div class="card-name">Zillions Apple/Cherry</div>
         <div class="card-meta">Zillions | 6/24x1.4 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$15.66 MXN <small>($0.87 USD)</small></div>
-          <button class="add-btn" id="btn-175" onclick="addToCart(175,'Zillions Apple/Cherry',0.87,15.66)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-175" onclick="addToCart(175,'Zillions Apple/Cherry',0.87,15.66)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="zillions clown strawberry" data-id="176">
-      <div class="card-img" id="img-176"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-176"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Zillions Clown Strawberry</div>
         <div class="card-name">Zillions Clown Strawberry</div>
         <div class="card-meta">Zillions | 12/24x.56 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$8.64 MXN <small>($0.48 USD)</small></div>
-          <button class="add-btn" id="btn-176" onclick="addToCart(176,'Zillions Clown Strawberry',0.48,8.64)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-176" onclick="addToCart(176,'Zillions Clown Strawberry',0.48,8.64)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Candy & Chocolate" data-name="zillions strawberry/raspberry" data-id="174">
-      <div class="card-img" id="img-174"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-174"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>זיליונות תות/פטל</div>
         <div class="card-name">Zillions Strawberry/Raspberry</div>
         <div class="card-meta">Zillions | 6/24x1.4 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$15.66 MXN <small>($0.87 USD)</small></div>
-          <button class="add-btn" id="btn-174" onclick="addToCart(174,'Zillions Strawberry/Raspberry',0.87,15.66)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-174" onclick="addToCart(174,'Zillions Strawberry/Raspberry',0.87,15.66)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -949,26 +956,26 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   <h2 class="cat-title">Canned & Jarred <span class="cat-count">13</span></h2>
   <div class="grid">
     <div class="card" data-cat="Canned & Jarred" data-name="gefen 10 oz stuffed manz olives" data-id="58">
-      <div class="card-img" id="img-58"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-58"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>GEFEN 10 OZ ממולאים זיתים</div>
         <div class="card-name">GEFEN 10 OZ STUFFED MANZ OLIVES</div>
         <div class="card-meta">GEFEN | 10 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$90.18 MXN <small>($5.01 USD)</small></div>
-          <button class="add-btn" id="btn-58" onclick="addToCart(58,'GEFEN 10 OZ STUFFED MANZ OLIVES',5.01,90.18)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-58" onclick="addToCart(58,'GEFEN 10 OZ STUFFED MANZ OLIVES',5.01,90.18)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Canned & Jarred" data-name="gefen pickled hot peppers" data-id="53">
-      <div class="card-img" id="img-53"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-53"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>גפן פלפלים חריפים כבושים</div>
         <div class="card-name">GEFEN PICKLED HOT PEPPERS</div>
         <div class="card-meta">GEFEN | 19 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$47.70 MXN <small>($2.65 USD)</small></div>
-          <button class="add-btn" id="btn-53" onclick="addToCart(53,'GEFEN PICKLED HOT PEPPERS',2.65,47.7)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-53" onclick="addToCart(53,'GEFEN PICKLED HOT PEPPERS',2.65,47.7)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -980,19 +987,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 19 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$71.10 MXN <small>($3.95 USD)</small></div>
-          <button class="add-btn" id="btn-54" onclick="addToCart(54,'GEFEN PITTED GREEN OLIVES',3.95,71.1)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-54" onclick="addToCart(54,'GEFEN PITTED GREEN OLIVES',3.95,71.1)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Canned & Jarred" data-name="gefen sliced black olives" data-id="57">
-      <div class="card-img" id="img-57"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-57"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>GEFEN פרוס זיתים שחורים</div>
         <div class="card-name">GEFEN SLICED BLACK OLIVES</div>
         <div class="card-meta">GEFEN | 19 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$71.10 MXN <small>($3.95 USD)</small></div>
-          <button class="add-btn" id="btn-57" onclick="addToCart(57,'GEFEN SLICED BLACK OLIVES',3.95,71.1)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-57" onclick="addToCart(57,'GEFEN SLICED BLACK OLIVES',3.95,71.1)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1004,19 +1011,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 19 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$71.10 MXN <small>($3.95 USD)</small></div>
-          <button class="add-btn" id="btn-55" onclick="addToCart(55,'GEFEN SLICED GREEN OLIVES',3.95,71.1)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-55" onclick="addToCart(55,'GEFEN SLICED GREEN OLIVES',3.95,71.1)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Canned & Jarred" data-name="gefen whole green olives" data-id="56">
-      <div class="card-img" id="img-56"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-56"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>גפן זיתים ירוקים שלמים</div>
         <div class="card-name">GEFEN WHOLE GREEN OLIVES</div>
         <div class="card-meta">GEFEN | 19 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$70.92 MXN <small>($3.94 USD)</small></div>
-          <button class="add-btn" id="btn-56" onclick="addToCart(56,'GEFEN WHOLE GREEN OLIVES',3.94,70.92)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-56" onclick="addToCart(56,'GEFEN WHOLE GREEN OLIVES',3.94,70.92)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1028,7 +1035,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">KEDEM | 24 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$116.46 MXN <small>($6.47 USD)</small></div>
-          <button class="add-btn" id="btn-1" onclick="addToCart(1,'KEDEM GEFILTE FISH',6.47,116.46)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-1" onclick="addToCart(1,'KEDEM GEFILTE FISH',6.47,116.46)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1040,7 +1047,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">SEA | 2 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$12.42 MXN <small>($0.69 USD)</small></div>
-          <button class="add-btn" id="btn-98" onclick="addToCart(98,'SEA CASTLE ANCHOVIES  FILLETS IN OLIVE OIL',0.69,12.42)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-98" onclick="addToCart(98,'SEA CASTLE ANCHOVIES  FILLETS IN OLIVE OIL',0.69,12.42)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1052,31 +1059,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">SEA | 4.4 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$30.96 MXN <small>($1.72 USD)</small></div>
-          <button class="add-btn" id="btn-96" onclick="addToCart(96,'SEA CASTLE SARDINES IN PURE OLIVE OIL',1.72,30.96)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-96" onclick="addToCart(96,'SEA CASTLE SARDINES IN PURE OLIVE OIL',1.72,30.96)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Canned & Jarred" data-name="tuna fillet 4.4 oz finer fin smoked" data-id="73">
-      <div class="card-img" id="img-73"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-73"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>פילה טונה 4.4 OZ FINER FIN מעושן</div>
         <div class="card-name">TUNA FILLET 4.4 OZ FINER FIN SMOKED</div>
         <div class="card-meta">TUNA</div>
         <div class="card-bottom">
           <div class="card-price">$98.64 MXN <small>($5.48 USD)</small></div>
-          <button class="add-btn" id="btn-73" onclick="addToCart(73,'TUNA FILLET 4.4 OZ FINER FIN SMOKED',5.48,98.64)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-73" onclick="addToCart(73,'TUNA FILLET 4.4 OZ FINER FIN SMOKED',5.48,98.64)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Canned & Jarred" data-name="tuna fillet 4.4 oz finer fin zesty lemon" data-id="72">
-      <div class="card-img" id="img-72"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-72"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>פילה טונה 4.4 OZ FINER FIN ZESTY LEMON</div>
         <div class="card-name">TUNA FILLET 4.4 OZ FINER FIN ZESTY LEMON</div>
         <div class="card-meta">TUNA</div>
         <div class="card-bottom">
           <div class="card-price">$98.64 MXN <small>($5.48 USD)</small></div>
-          <button class="add-btn" id="btn-72" onclick="addToCart(72,'TUNA FILLET 4.4 OZ FINER FIN ZESTY LEMON',5.48,98.64)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-72" onclick="addToCart(72,'TUNA FILLET 4.4 OZ FINER FIN ZESTY LEMON',5.48,98.64)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1088,19 +1095,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">TUSCANINI | 5.6 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$113.94 MXN <small>($6.33 USD)</small></div>
-          <button class="add-btn" id="btn-119" onclick="addToCart(119,'TUSCANINI SOLID LIGHT TUNA IN OLIVE OIL - small jar',6.33,113.94)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-119" onclick="addToCart(119,'TUSCANINI SOLID LIGHT TUNA IN OLIVE OIL - small jar',6.33,113.94)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Canned & Jarred" data-name="tuscanini solid light tuna in olive oil with chili peppers - three pack" data-id="120">
-      <div class="card-img" id="img-120"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-120"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>טונה קלה מוצקה טוסקניני בשמן זית עם פלפלי צ'ילי - חבילות שלוש</div>
         <div class="card-name">TUSCANINI SOLID LIGHT TUNA IN OLIVE OIL WITH CHILI PEPPERS - THREE PACK</div>
         <div class="card-meta">TUSCANINI | 3x2.82 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$123.66 MXN <small>($6.87 USD)</small></div>
-          <button class="add-btn" id="btn-120" onclick="addToCart(120,'TUSCANINI SOLID LIGHT TUNA IN OLIVE OIL WITH CHILI PEPPERS - THREE PACK',6.87,123.66)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-120" onclick="addToCart(120,'TUSCANINI SOLID LIGHT TUNA IN OLIVE OIL WITH CHILI PEPPERS - THREE PACK',6.87,123.66)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1117,7 +1124,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">BARTENURA | 16.9 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$115.56 MXN <small>($6.42 USD)</small></div>
-          <button class="add-btn" id="btn-15" onclick="addToCart(15,'BARTENURA BALSAMIC VINEGAR',6.42,115.56)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-15" onclick="addToCart(15,'BARTENURA BALSAMIC VINEGAR',6.42,115.56)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1129,7 +1136,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 24 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$59.94 MXN <small>($3.33 USD)</small></div>
-          <button class="add-btn" id="btn-35" onclick="addToCart(35,'GEFEN CLASSIC PASTA SAUCE',3.33,59.94)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-35" onclick="addToCart(35,'GEFEN CLASSIC PASTA SAUCE',3.33,59.94)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1141,43 +1148,43 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 40 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$106.56 MXN <small>($5.92 USD)</small></div>
-          <button class="add-btn" id="btn-36" onclick="addToCart(36,'GEFEN SWEET & SOUR DUCK SAUCE',5.92,106.56)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-36" onclick="addToCart(36,'GEFEN SWEET & SOUR DUCK SAUCE',5.92,106.56)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Condiments & Sauces" data-name="haddar sesame style teriyaki sauce" data-id="88">
-      <div class="card-img" id="img-88"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-88"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>רוטב טריאקי בסגנון HADDAR שומשום</div>
         <div class="card-name">HADDAR SESAME STYLE TERIYAKI SAUCE</div>
         <div class="card-meta">HADDAR | 15 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$70.56 MXN <small>($3.92 USD)</small></div>
-          <button class="add-btn" id="btn-88" onclick="addToCart(88,'HADDAR SESAME STYLE TERIYAKI SAUCE',3.92,70.56)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-88" onclick="addToCart(88,'HADDAR SESAME STYLE TERIYAKI SAUCE',3.92,70.56)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Condiments & Sauces" data-name="haddar sweet chili sauce" data-id="89">
-      <div class="card-img" id="img-89"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-89"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>HADAR רוטב צ'ילי מתוק</div>
         <div class="card-name">HADDAR SWEET CHILI SAUCE</div>
         <div class="card-meta">HADDAR | 15 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$70.56 MXN <small>($3.92 USD)</small></div>
-          <button class="add-btn" id="btn-89" onclick="addToCart(89,'HADDAR SWEET CHILI SAUCE',3.92,70.56)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-89" onclick="addToCart(89,'HADDAR SWEET CHILI SAUCE',3.92,70.56)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Condiments & Sauces" data-name="haddar teriyaki sauce" data-id="87">
-      <div class="card-img" id="img-87"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-87"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>רוטב הדר טריאקי</div>
         <div class="card-name">HADDAR TERIYAKI SAUCE</div>
         <div class="card-meta">HADDAR | 12.7 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$52.56 MXN <small>($2.92 USD)</small></div>
-          <button class="add-btn" id="btn-87" onclick="addToCart(87,'HADDAR TERIYAKI SAUCE',2.92,52.56)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-87" onclick="addToCart(87,'HADDAR TERIYAKI SAUCE',2.92,52.56)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1189,7 +1196,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">KEDEM | 12.7 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$65.88 MXN <small>($3.66 USD)</small></div>
-          <button class="add-btn" id="btn-12" onclick="addToCart(12,'KEDEM BALSAMIC VINEGAR',3.66,65.88)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-12" onclick="addToCart(12,'KEDEM BALSAMIC VINEGAR',3.66,65.88)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1201,19 +1208,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">SEA | 4.4 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$30.96 MXN <small>($1.72 USD)</small></div>
-          <button class="add-btn" id="btn-97" onclick="addToCart(97,'SEA CASTLE SARDINES IN TOMATO SAUCE',1.72,30.96)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-97" onclick="addToCart(97,'SEA CASTLE SARDINES IN TOMATO SAUCE',1.72,30.96)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Condiments & Sauces" data-name="tonelli 1000 island salad dressing" data-id="107">
-      <div class="card-img" id="img-107"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-107"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>רוטב סלט TONELLI 1000 ISLAND</div>
         <div class="card-name">TONELLI 1000 ISLAND SALAD DRESSING</div>
         <div class="card-meta">TONELLI | 16 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$54.54 MXN <small>($3.03 USD)</small></div>
-          <button class="add-btn" id="btn-107" onclick="addToCart(107,'TONELLI 1000 ISLAND SALAD DRESSING',3.03,54.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-107" onclick="addToCart(107,'TONELLI 1000 ISLAND SALAD DRESSING',3.03,54.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1225,7 +1232,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">TONELLI | 16 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$54.54 MXN <small>($3.03 USD)</small></div>
-          <button class="add-btn" id="btn-108" onclick="addToCart(108,'TONELLI BALSAMIC VINAIGRETTE SALAD DRESSING',3.03,54.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-108" onclick="addToCart(108,'TONELLI BALSAMIC VINAIGRETTE SALAD DRESSING',3.03,54.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1237,43 +1244,43 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">TONELLI | 17 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$65.88 MXN <small>($3.66 USD)</small></div>
-          <button class="add-btn" id="btn-102" onclick="addToCart(102,'TONELLI BALSAMIC VINEGAR',3.66,65.88)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-102" onclick="addToCart(102,'TONELLI BALSAMIC VINEGAR',3.66,65.88)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Condiments & Sauces" data-name="tonelli french salad dressing" data-id="106">
-      <div class="card-img" id="img-106"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-106"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>רוטב לסלט צרפתי TONELLI</div>
         <div class="card-name">TONELLI FRENCH SALAD DRESSING</div>
         <div class="card-meta">TONELLI | 16 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$54.54 MXN <small>($3.03 USD)</small></div>
-          <button class="add-btn" id="btn-106" onclick="addToCart(106,'TONELLI FRENCH SALAD DRESSING',3.03,54.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-106" onclick="addToCart(106,'TONELLI FRENCH SALAD DRESSING',3.03,54.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Condiments & Sauces" data-name="tonelli italian salad dressing" data-id="105">
-      <div class="card-img" id="img-105"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-105"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>רוטב סלט איטלקי TONELLI</div>
         <div class="card-name">TONELLI ITALIAN SALAD DRESSING</div>
         <div class="card-meta">TONELLI | 16 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$54.54 MXN <small>($3.03 USD)</small></div>
-          <button class="add-btn" id="btn-105" onclick="addToCart(105,'TONELLI ITALIAN SALAD DRESSING',3.03,54.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-105" onclick="addToCart(105,'TONELLI ITALIAN SALAD DRESSING',3.03,54.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Condiments & Sauces" data-name="tonnelli fat free pizza sauce" data-id="104">
-      <div class="card-img" id="img-104"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-104"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>רוטב פיצה ללא שומן של TONNELLI</div>
         <div class="card-name">TONNELLI FAT FREE PIZZA SAUCE</div>
         <div class="card-meta">TONNELLI | 24 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$49.68 MXN <small>($2.76 USD)</small></div>
-          <button class="add-btn" id="btn-104" onclick="addToCart(104,'TONNELLI FAT FREE PIZZA SAUCE',2.76,49.68)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-104" onclick="addToCart(104,'TONNELLI FAT FREE PIZZA SAUCE',2.76,49.68)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1285,19 +1292,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">TONNELLI | 24 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$49.68 MXN <small>($2.76 USD)</small></div>
-          <button class="add-btn" id="btn-103" onclick="addToCart(103,'TONNELLI PIZZA SAUCE',2.76,49.68)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-103" onclick="addToCart(103,'TONNELLI PIZZA SAUCE',2.76,49.68)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Condiments & Sauces" data-name="tuscanini 500ml balsamic vinegar of modena" data-id="114">
-      <div class="card-img" id="img-114"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-114"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>TUSCANINI 500ML חומץ בלסמי של מודנה</div>
         <div class="card-name">TUSCANINI 500ML BALSAMIC VINEGAR OF MODENA</div>
         <div class="card-meta">TUSCANINI | 16.9 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$115.56 MXN <small>($6.42 USD)</small></div>
-          <button class="add-btn" id="btn-114" onclick="addToCart(114,'TUSCANINI 500ML BALSAMIC VINEGAR OF MODENA',6.42,115.56)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-114" onclick="addToCart(114,'TUSCANINI 500ML BALSAMIC VINEGAR OF MODENA',6.42,115.56)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1309,7 +1316,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">TUSCANINI | 17.6 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$35.28 MXN <small>($1.96 USD)</small></div>
-          <button class="add-btn" id="btn-115" onclick="addToCart(115,'TUSCANINI TOMATO SAUCE - BOX',1.96,35.28)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-115" onclick="addToCart(115,'TUSCANINI TOMATO SAUCE - BOX',1.96,35.28)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1326,7 +1333,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Milk | 6/24x1.58oz</div>
         <div class="card-bottom">
           <div class="card-price">$24.48 MXN <small>($1.36 USD)</small></div>
-          <button class="add-btn" id="btn-181" onclick="addToCart(181,'Milk Munch Bars',1.36,24.48)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-181" onclick="addToCart(181,'Milk Munch Bars',1.36,24.48)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1338,19 +1345,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Milk | 4/10x5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$70.38 MXN <small>($3.91 USD)</small></div>
-          <button class="add-btn" id="btn-199" onclick="addToCart(199,'Milk Munch Bites',3.91,70.38)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-199" onclick="addToCart(199,'Milk Munch Bites',3.91,70.38)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Dairy & Alternatives" data-name="mini milk munch bag (11 pk)" data-id="145">
-      <div class="card-img" id="img-145"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-145"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>שקית מיני חלב מאנץ' (11 יח')</div>
         <div class="card-name">Mini Milk Munch Bag (11 pk)</div>
         <div class="card-meta">Mini | 24/8.8 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$36.18 MXN <small>($2.01 USD)</small></div>
-          <button class="add-btn" id="btn-145" onclick="addToCart(145,'Mini Milk Munch Bag (11 pk)',2.01,36.18)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-145" onclick="addToCart(145,'Mini Milk Munch Bag (11 pk)',2.01,36.18)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1360,26 +1367,26 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   <h2 class="cat-title">General Grocery <span class="cat-count">69</span></h2>
   <div class="grid">
     <div class="card" data-cat="General Grocery" data-name="apricot fruit leather" data-id="177">
-      <div class="card-img" id="img-177"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-177"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>עור פירות משמש</div>
         <div class="card-name">Apricot Fruit Leather</div>
         <div class="card-meta">Apricot | 48/.75 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$17.64 MXN <small>($0.98 USD)</small></div>
-          <button class="add-btn" id="btn-177" onclick="addToCart(177,'Apricot Fruit Leather',0.98,17.64)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-177" onclick="addToCart(177,'Apricot Fruit Leather',0.98,17.64)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="assorted sandwich" data-id="128">
-      <div class="card-img" id="img-128"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-128"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>סנדוויץ' מגוון</div>
         <div class="card-name">Assorted Sandwich</div>
         <div class="card-meta">Assorted | 12/25 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$51.30 MXN <small>($2.85 USD)</small></div>
-          <button class="add-btn" id="btn-128" onclick="addToCart(128,'Assorted Sandwich',2.85,51.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-128" onclick="addToCart(128,'Assorted Sandwich',2.85,51.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1391,7 +1398,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Big | 6/48x.42 oz</div>
         <div class="card-bottom">
           <div class="card-price">$6.30 MXN <small>($0.35 USD)</small></div>
-          <button class="add-btn" id="btn-151" onclick="addToCart(151,'Big Dipper',0.35,6.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-151" onclick="addToCart(151,'Big Dipper',0.35,6.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1403,7 +1410,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Blaz'n | 6/12x1.69 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$29.88 MXN <small>($1.66 USD)</small></div>
-          <button class="add-btn" id="btn-152" onclick="addToCart(152,'Blaz\'n Blast',1.66,29.88)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-152" onclick="addToCart(152,'Blaz\'n Blast',1.66,29.88)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1415,31 +1422,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Cherry | 48/.75 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$17.64 MXN <small>($0.98 USD)</small></div>
-          <button class="add-btn" id="btn-178" onclick="addToCart(178,'Cherry Fruit Leather',0.98,17.64)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-178" onclick="addToCart(178,'Cherry Fruit Leather',0.98,17.64)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="chunky dory" data-id="135">
-      <div class="card-img" id="img-135"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-135"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>דורי השמנמן</div>
         <div class="card-name">Chunky Dory</div>
         <div class="card-meta">Chunky | 12/11.75 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$158.40 MXN <small>($8.80 USD)</small></div>
-          <button class="add-btn" id="btn-135" onclick="addToCart(135,'Chunky Dory',8.8,158.4)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-135" onclick="addToCart(135,'Chunky Dory',8.8,158.4)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="duplex sandwich" data-id="126">
-      <div class="card-img" id="img-126"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-126"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>סנדוויץ' דופלקס</div>
         <div class="card-name">Duplex Sandwich</div>
         <div class="card-meta">Duplex | 12/25 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$51.30 MXN <small>($2.85 USD)</small></div>
-          <button class="add-btn" id="btn-126" onclick="addToCart(126,'Duplex Sandwich',2.85,51.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-126" onclick="addToCart(126,'Duplex Sandwich',2.85,51.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1451,7 +1458,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">ELITE | 2.3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$51.30 MXN <small>($2.85 USD)</small></div>
-          <button class="add-btn" id="btn-23" onclick="addToCart(23,'ELITE BAZOOKA CLASSIC GUM',2.85,51.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-23" onclick="addToCart(23,'ELITE BAZOOKA CLASSIC GUM',2.85,51.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1463,19 +1470,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Encore | 6/24x1.76oz</div>
         <div class="card-bottom">
           <div class="card-price">$24.48 MXN <small>($1.36 USD)</small></div>
-          <button class="add-btn" id="btn-182" onclick="addToCart(182,'Encore Bars',1.36,24.48)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-182" onclick="addToCart(182,'Encore Bars',1.36,24.48)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="fruit reels fruit blast (6 pk)" data-id="143">
-      <div class="card-img" id="img-143"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-143"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Fruit Reels Fruit Blast (6 pk)</div>
         <div class="card-name">Fruit Reels Fruit Blast (6 pk)</div>
         <div class="card-meta">Fruit | 6/4.5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$70.38 MXN <small>($3.91 USD)</small></div>
-          <button class="add-btn" id="btn-143" onclick="addToCart(143,'Fruit Reels Fruit Blast (6 pk)',3.91,70.38)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-143" onclick="addToCart(143,'Fruit Reels Fruit Blast (6 pk)',3.91,70.38)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1487,7 +1494,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Fruit | 6/4.5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$70.38 MXN <small>($3.91 USD)</small></div>
-          <button class="add-btn" id="btn-142" onclick="addToCart(142,'Fruit Reels Raspberry (6 pk)',3.91,70.38)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-142" onclick="addToCart(142,'Fruit Reels Raspberry (6 pk)',3.91,70.38)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1499,7 +1506,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$36.54 MXN <small>($2.03 USD)</small></div>
-          <button class="add-btn" id="btn-39" onclick="addToCart(39,'GEFEN 3 OZ ROASTED PEELED CHESTNUTS',2.03,36.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-39" onclick="addToCart(39,'GEFEN 3 OZ ROASTED PEELED CHESTNUTS',2.03,36.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1511,19 +1518,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 32 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$75.06 MXN <small>($4.17 USD)</small></div>
-          <button class="add-btn" id="btn-48" onclick="addToCart(48,'GEFEN 32 OZ DILL GHERKINS',4.17,75.06)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-48" onclick="addToCart(48,'GEFEN 32 OZ DILL GHERKINS',4.17,75.06)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="gefen 32 oz dill pickles" data-id="46">
-      <div class="card-img" id="img-46"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-46"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>GEFEN 32 OZ שמיר חמוצים</div>
         <div class="card-name">GEFEN 32 OZ DILL PICKLES</div>
         <div class="card-meta">GEFEN | 32 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$71.82 MXN <small>($3.99 USD)</small></div>
-          <button class="add-btn" id="btn-46" onclick="addToCart(46,'GEFEN 32 OZ DILL PICKLES',3.99,71.82)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-46" onclick="addToCart(46,'GEFEN 32 OZ DILL PICKLES',3.99,71.82)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1535,31 +1542,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 27 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$41.22 MXN <small>($2.29 USD)</small></div>
-          <button class="add-btn" id="btn-71" onclick="addToCart(71,'GEFEN CHERRY ICE POPS',2.29,41.22)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-71" onclick="addToCart(71,'GEFEN CHERRY ICE POPS',2.29,41.22)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="gefen clear unflavored jello" data-id="74">
-      <div class="card-img" id="img-74"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-74"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>GEFEN CLEAR ללא טעם ג'לו</div>
         <div class="card-name">GEFEN CLEAR UNFLAVORED JELLO</div>
         <div class="card-meta">GEFEN | 3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$22.50 MXN <small>($1.25 USD)</small></div>
-          <button class="add-btn" id="btn-74" onclick="addToCart(74,'GEFEN CLEAR UNFLAVORED JELLO',1.25,22.5)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-74" onclick="addToCart(74,'GEFEN CLEAR UNFLAVORED JELLO',1.25,22.5)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="gefen diet clear unflavored jello" data-id="77">
-      <div class="card-img" id="img-77"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-77"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>GEFEN DIET ג'לו צלול ללא טעם</div>
         <div class="card-name">GEFEN DIET CLEAR UNFLAVORED JELLO</div>
         <div class="card-meta">GEFEN | 0.3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$22.50 MXN <small>($1.25 USD)</small></div>
-          <button class="add-btn" id="btn-77" onclick="addToCart(77,'GEFEN DIET CLEAR UNFLAVORED JELLO',1.25,22.5)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-77" onclick="addToCart(77,'GEFEN DIET CLEAR UNFLAVORED JELLO',1.25,22.5)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1571,31 +1578,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 0.33 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$22.50 MXN <small>($1.25 USD)</small></div>
-          <button class="add-btn" id="btn-76" onclick="addToCart(76,'GEFEN DIET RASPBERRY JELLO',1.25,22.5)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-76" onclick="addToCart(76,'GEFEN DIET RASPBERRY JELLO',1.25,22.5)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="gefen diet strawberry jello" data-id="75">
-      <div class="card-img" id="img-75"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-75"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>GEFEN DIET JELLO STRAWBERRY</div>
         <div class="card-name">GEFEN DIET STRAWBERRY JELLO</div>
         <div class="card-meta">GEFEN | 0.33 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$22.50 MXN <small>($1.25 USD)</small></div>
-          <button class="add-btn" id="btn-75" onclick="addToCart(75,'GEFEN DIET STRAWBERRY JELLO',1.25,22.5)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-75" onclick="addToCart(75,'GEFEN DIET STRAWBERRY JELLO',1.25,22.5)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="gefen fruit punch ice pops" data-id="70">
-      <div class="card-img" id="img-70"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-70"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>GEFEN Fruit PUNCH ICE POPS</div>
         <div class="card-name">GEFEN FRUIT PUNCH ICE POPS</div>
         <div class="card-meta">GEFEN | 27 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$31.86 MXN <small>($1.77 USD)</small></div>
-          <button class="add-btn" id="btn-70" onclick="addToCart(70,'GEFEN FRUIT PUNCH ICE POPS',1.77,31.86)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-70" onclick="addToCart(70,'GEFEN FRUIT PUNCH ICE POPS',1.77,31.86)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1607,7 +1614,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 6.75 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$92.16 MXN <small>($5.12 USD)</small></div>
-          <button class="add-btn" id="btn-67" onclick="addToCart(67,'GEFEN ICE CREAM CONES 48 CT',5.12,92.16)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-67" onclick="addToCart(67,'GEFEN ICE CREAM CONES 48 CT',5.12,92.16)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1619,19 +1626,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 6.75 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$107.82 MXN <small>($5.99 USD)</small></div>
-          <button class="add-btn" id="btn-66" onclick="addToCart(66,'GEFEN ICE CREAM CUPS 48 CT',5.99,107.82)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-66" onclick="addToCart(66,'GEFEN ICE CREAM CUPS 48 CT',5.99,107.82)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="gefen jumbo shells" data-id="41">
-      <div class="card-img" id="img-41"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-41"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>GEFEN JUMBO SHELLS</div>
         <div class="card-name">GEFEN JUMBO SHELLS</div>
         <div class="card-meta">GEFEN | 12 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$53.82 MXN <small>($2.99 USD)</small></div>
-          <button class="add-btn" id="btn-41" onclick="addToCart(41,'GEFEN JUMBO SHELLS',2.99,53.82)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-41" onclick="addToCart(41,'GEFEN JUMBO SHELLS',2.99,53.82)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1643,19 +1650,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 19 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$47.88 MXN <small>($2.66 USD)</small></div>
-          <button class="add-btn" id="btn-50" onclick="addToCart(50,'GEFEN LARGE CUCUMBERS IN BRINE 7-9',2.66,47.88)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-50" onclick="addToCart(50,'GEFEN LARGE CUCUMBERS IN BRINE 7-9',2.66,47.88)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="gefen mini cucumbers in brine 18-25" data-id="52">
-      <div class="card-img" id="img-52"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-52"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>GEFEN MINI מלפפונים במלח 18-25</div>
         <div class="card-name">GEFEN MINI CUCUMBERS IN BRINE 18-25</div>
         <div class="card-meta">GEFEN | 19 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$73.80 MXN <small>($4.10 USD)</small></div>
-          <button class="add-btn" id="btn-52" onclick="addToCart(52,'GEFEN MINI CUCUMBERS IN BRINE 18-25',4.1,73.8)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-52" onclick="addToCart(52,'GEFEN MINI CUCUMBERS IN BRINE 18-25',4.1,73.8)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1667,43 +1674,43 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 5.2 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$62.46 MXN <small>($3.47 USD)</small></div>
-          <button class="add-btn" id="btn-40" onclick="addToCart(40,'GEFEN ORGANIC ROASTED PEELED CHESTNUTS',3.47,62.46)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-40" onclick="addToCart(40,'GEFEN ORGANIC ROASTED PEELED CHESTNUTS',3.47,62.46)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="gefen raspberry ice pops - 8 ct" data-id="69">
-      <div class="card-img" id="img-69"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-69"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>GEFEN RASPBERRY ICE POPS - 8 CT</div>
         <div class="card-name">GEFEN RASPBERRY ICE POPS - 8 CT</div>
         <div class="card-meta">GEFEN | 27 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$31.86 MXN <small>($1.77 USD)</small></div>
-          <button class="add-btn" id="btn-69" onclick="addToCart(69,'GEFEN RASPBERRY ICE POPS - 8 CT',1.77,31.86)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-69" onclick="addToCart(69,'GEFEN RASPBERRY ICE POPS - 8 CT',1.77,31.86)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="gefen red lentils" data-id="33">
-      <div class="card-img" id="img-33"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-33"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>GEFEN עדשים אדומות</div>
         <div class="card-name">GEFEN RED LENTILS</div>
         <div class="card-meta">GEFEN | 16 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$41.22 MXN <small>($2.29 USD)</small></div>
-          <button class="add-btn" id="btn-33" onclick="addToCart(33,'GEFEN RED LENTILS',2.29,41.22)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-33" onclick="addToCart(33,'GEFEN RED LENTILS',2.29,41.22)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="gefen sliced banana peppers" data-id="49">
-      <div class="card-img" id="img-49"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-49"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>פלפלי בננה פרוסים GEFEN</div>
         <div class="card-name">GEFEN SLICED BANANA PEPPERS</div>
         <div class="card-meta">GEFEN | 16 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$63.18 MXN <small>($3.51 USD)</small></div>
-          <button class="add-btn" id="btn-49" onclick="addToCart(49,'GEFEN SLICED BANANA PEPPERS',3.51,63.18)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-49" onclick="addToCart(49,'GEFEN SLICED BANANA PEPPERS',3.51,63.18)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1715,7 +1722,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 15 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$28.62 MXN <small>($1.59 USD)</small></div>
-          <button class="add-btn" id="btn-38" onclick="addToCart(38,'GEFEN SLICED BEETS',1.59,28.62)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-38" onclick="addToCart(38,'GEFEN SLICED BEETS',1.59,28.62)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1727,55 +1734,55 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 19 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$63.90 MXN <small>($3.55 USD)</small></div>
-          <button class="add-btn" id="btn-51" onclick="addToCart(51,'GEFEN SMALL CUCUMBERS IN BRINE 13-17',3.55,63.9)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-51" onclick="addToCart(51,'GEFEN SMALL CUCUMBERS IN BRINE 13-17',3.55,63.9)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="gefen whole beets" data-id="37">
-      <div class="card-img" id="img-37"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-37"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>גפן סלק שלם</div>
         <div class="card-name">GEFEN WHOLE BEETS</div>
         <div class="card-meta">GEFEN | 15 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$28.62 MXN <small>($1.59 USD)</small></div>
-          <button class="add-btn" id="btn-37" onclick="addToCart(37,'GEFEN WHOLE BEETS',1.59,28.62)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-37" onclick="addToCart(37,'GEFEN WHOLE BEETS',1.59,28.62)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="glicks cherry pie filling" data-id="78">
-      <div class="card-img" id="img-78"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-78"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>מילוי פאי דובדבנים GLICKS</div>
         <div class="card-name">GLICKS CHERRY PIE FILLING</div>
         <div class="card-meta">GLICKS | 21 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$75.06 MXN <small>($4.17 USD)</small></div>
-          <button class="add-btn" id="btn-78" onclick="addToCart(78,'GLICKS CHERRY PIE FILLING',4.17,75.06)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-78" onclick="addToCart(78,'GLICKS CHERRY PIE FILLING',4.17,75.06)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="glicks chulent mix" data-id="80">
-      <div class="card-img" id="img-80"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-80"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>GLICKS CHULENT MIX</div>
         <div class="card-name">GLICKS CHULENT MIX</div>
         <div class="card-meta">GLICKS | 16 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$29.88 MXN <small>($1.66 USD)</small></div>
-          <button class="add-btn" id="btn-80" onclick="addToCart(80,'GLICKS CHULENT MIX',1.66,29.88)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-80" onclick="addToCart(80,'GLICKS CHULENT MIX',1.66,29.88)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="glicks light cherry pie filling" data-id="79">
-      <div class="card-img" id="img-79"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-79"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>מילוי פאי דובדבנים GLICKS LIGHT</div>
         <div class="card-name">GLICKS LIGHT CHERRY PIE FILLING</div>
         <div class="card-meta">GLICKS | 20 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$75.06 MXN <small>($4.17 USD)</small></div>
-          <button class="add-btn" id="btn-79" onclick="addToCart(79,'GLICKS LIGHT CHERRY PIE FILLING',4.17,75.06)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-79" onclick="addToCart(79,'GLICKS LIGHT CHERRY PIE FILLING',4.17,75.06)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1787,31 +1794,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Grape | 48/.75 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$17.64 MXN <small>($0.98 USD)</small></div>
-          <button class="add-btn" id="btn-179" onclick="addToCart(179,'Grape Fruit Leather',0.98,17.64)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-179" onclick="addToCart(179,'Grape Fruit Leather',0.98,17.64)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="haddar classic pistachio halvah" data-id="94">
-      <div class="card-img" id="img-94"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-94"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>HADAR CLASSIC פיסטוק חלווה</div>
         <div class="card-name">HADDAR CLASSIC PISTACHIO HALVAH</div>
         <div class="card-meta">HADDAR | 12.34 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$90.90 MXN <small>($5.05 USD)</small></div>
-          <button class="add-btn" id="btn-94" onclick="addToCart(94,'HADDAR CLASSIC PISTACHIO HALVAH',5.05,90.9)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-94" onclick="addToCart(94,'HADDAR CLASSIC PISTACHIO HALVAH',5.05,90.9)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="haddar classic vanilla halvah" data-id="93">
-      <div class="card-img" id="img-93"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-93"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>HADAR CLASSIC וניל חלווה</div>
         <div class="card-name">HADDAR CLASSIC VANILLA HALVAH</div>
         <div class="card-meta">HADDAR | 12.34 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$69.30 MXN <small>($3.85 USD)</small></div>
-          <button class="add-btn" id="btn-93" onclick="addToCart(93,'HADDAR CLASSIC VANILLA HALVAH',3.85,69.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-93" onclick="addToCart(93,'HADDAR CLASSIC VANILLA HALVAH',3.85,69.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1823,7 +1830,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">HADDAR | 6 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$44.64 MXN <small>($2.48 USD)</small></div>
-          <button class="add-btn" id="btn-84" onclick="addToCart(84,'HADDAR PIE CRUST',2.48,44.64)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-84" onclick="addToCart(84,'HADDAR PIE CRUST',2.48,44.64)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1835,7 +1842,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">HADDAR | 15.9 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$92.88 MXN <small>($5.16 USD)</small></div>
-          <button class="add-btn" id="btn-86" onclick="addToCart(86,'HADDAR SEASONED TAHINI',5.16,92.88)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-86" onclick="addToCart(86,'HADDAR SEASONED TAHINI',5.16,92.88)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1847,19 +1854,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">HADDAR | 15.9 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$92.52 MXN <small>($5.14 USD)</small></div>
-          <button class="add-btn" id="btn-85" onclick="addToCart(85,'HADDAR TAHINI',5.14,92.52)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-85" onclick="addToCart(85,'HADDAR TAHINI',5.14,92.52)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="jar refreshers spearmint (30 pc)" data-id="149">
-      <div class="card-img" id="img-149"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-149"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>מרענן צנצנת מנטה (30 יחידות)</div>
         <div class="card-name">Jar Refreshers Spearmint (30 pc)</div>
         <div class="card-meta">Jar | 12/6x2.34 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$41.22 MXN <small>($2.29 USD)</small></div>
-          <button class="add-btn" id="btn-149" onclick="addToCart(149,'Jar Refreshers Spearmint (30 pc)',2.29,41.22)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-149" onclick="addToCart(149,'Jar Refreshers Spearmint (30 pc)',2.29,41.22)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1871,31 +1878,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Lady | 20/7 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$52.92 MXN <small>($2.94 USD)</small></div>
-          <button class="add-btn" id="btn-139" onclick="addToCart(139,'Lady Fingers',2.94,52.92)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-139" onclick="addToCart(139,'Lady Fingers',2.94,52.92)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="lg oodles cherry" data-id="160">
-      <div class="card-img" id="img-160"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-160"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Lg Oodles Cherry</div>
         <div class="card-name">Lg Oodles Cherry</div>
         <div class="card-meta">Lg | 8/24x2.29 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$10.62 MXN <small>($0.59 USD)</small></div>
-          <button class="add-btn" id="btn-160" onclick="addToCart(160,'Lg Oodles Cherry',0.59,10.62)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-160" onclick="addToCart(160,'Lg Oodles Cherry',0.59,10.62)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="lg oodles strawberry" data-id="161">
-      <div class="card-img" id="img-161"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-161"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Lg Oodles Strawberry</div>
         <div class="card-name">Lg Oodles Strawberry</div>
         <div class="card-meta">Lg | 8/24x2.29 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$10.62 MXN <small>($0.59 USD)</small></div>
-          <button class="add-btn" id="btn-161" onclick="addToCart(161,'Lg Oodles Strawberry',0.59,10.62)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-161" onclick="addToCart(161,'Lg Oodles Strawberry',0.59,10.62)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1907,7 +1914,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Marshmallows | 12/8 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$35.10 MXN <small>($1.95 USD)</small></div>
-          <button class="add-btn" id="btn-140" onclick="addToCart(140,'Marshmallows White',1.95,35.1)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-140" onclick="addToCart(140,'Marshmallows White',1.95,35.1)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1919,7 +1926,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Mini | 24/9.1 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$36.18 MXN <small>($2.01 USD)</small></div>
-          <button class="add-btn" id="btn-146" onclick="addToCart(146,'Mini Encore Bags (13 pk)',2.01,36.18)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-146" onclick="addToCart(146,'Mini Encore Bags (13 pk)',2.01,36.18)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1931,7 +1938,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Mini | 12/8 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$75.78 MXN <small>($4.21 USD)</small></div>
-          <button class="add-btn" id="btn-141" onclick="addToCart(141,'Mini Marshmallows White',4.21,75.78)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-141" onclick="addToCart(141,'Mini Marshmallows White',4.21,75.78)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1943,31 +1950,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Mini | 24/8.8 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$36.18 MXN <small>($2.01 USD)</small></div>
-          <button class="add-btn" id="btn-147" onclick="addToCart(147,'Mini Smirk Bagged (11 pk)',2.01,36.18)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-147" onclick="addToCart(147,'Mini Smirk Bagged (11 pk)',2.01,36.18)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="nutty chews" data-id="185">
-      <div class="card-img" id="img-185"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-185"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>לעיסות אגוזים</div>
         <div class="card-name">Nutty Chews</div>
         <div class="card-meta">Nutty | 6/24x1.76 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$24.66 MXN <small>($1.37 USD)</small></div>
-          <button class="add-btn" id="btn-185" onclick="addToCart(185,'Nutty Chews',1.37,24.66)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-185" onclick="addToCart(185,'Nutty Chews',1.37,24.66)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="nutty chews-bag" data-id="144">
-      <div class="card-img" id="img-144"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-144"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>שקית לעיסה אגוזים</div>
         <div class="card-name">Nutty Chews-bag</div>
         <div class="card-meta">Nutty | 24/10 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$111.06 MXN <small>($6.17 USD)</small></div>
-          <button class="add-btn" id="btn-144" onclick="addToCart(144,'Nutty Chews-bag',6.17,111.06)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-144" onclick="addToCart(144,'Nutty Chews-bag',6.17,111.06)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -1979,31 +1986,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">PEREG | 4.25 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$97.56 MXN <small>($5.42 USD)</small></div>
-          <button class="add-btn" id="btn-125" onclick="addToCart(125,'PEREG SUMAC',5.42,97.56)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-125" onclick="addToCart(125,'PEREG SUMAC',5.42,97.56)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="powder pumps display" data-id="150">
-      <div class="card-img" id="img-150"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-150"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>תצוגת משאבות אבקה</div>
         <div class="card-name">Powder Pumps display</div>
         <div class="card-meta">Powder | 6/24x.35 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$7.02 MXN <small>($0.39 USD)</small></div>
-          <button class="add-btn" id="btn-150" onclick="addToCart(150,'Powder Pumps display',0.39,7.02)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-150" onclick="addToCart(150,'Powder Pumps display',0.39,7.02)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="rashi - black 14%" data-id="221">
-      <div class="card-img" id="img-221"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-221"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>RASHI - שחור 14%</div>
         <div class="card-name">RASHI - BLACK 14%</div>
         <div class="card-meta">RASHI | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$2663.28 MXN <small>($147.96 USD)</small></div>
-          <button class="add-btn" id="btn-221" onclick="addToCart(221,'RASHI - BLACK 14%',147.96,2663.28)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-221" onclick="addToCart(221,'RASHI - BLACK 14%',147.96,2663.28)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2015,19 +2022,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Sm | 6/48x.56 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$6.30 MXN <small>($0.35 USD)</small></div>
-          <button class="add-btn" id="btn-165" onclick="addToCart(165,'Sm Oodles Apple',0.35,6.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-165" onclick="addToCart(165,'Sm Oodles Apple',0.35,6.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="sm oodles cherry" data-id="162">
-      <div class="card-img" id="img-162"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-162"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Sm Oodles Cherry</div>
         <div class="card-name">Sm Oodles Cherry</div>
         <div class="card-meta">Sm | 6/48x.56 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$6.30 MXN <small>($0.35 USD)</small></div>
-          <button class="add-btn" id="btn-162" onclick="addToCart(162,'Sm Oodles Cherry',0.35,6.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-162" onclick="addToCart(162,'Sm Oodles Cherry',0.35,6.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2039,19 +2046,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Sm | 6/48x.56 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$6.30 MXN <small>($0.35 USD)</small></div>
-          <button class="add-btn" id="btn-166" onclick="addToCart(166,'Sm Oodles Grape',0.35,6.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-166" onclick="addToCart(166,'Sm Oodles Grape',0.35,6.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="sm oodles raspberry" data-id="163">
-      <div class="card-img" id="img-163"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-163"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Sm Oodles Raspberry</div>
         <div class="card-name">Sm Oodles Raspberry</div>
         <div class="card-meta">Sm | 6/48x.56 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$6.30 MXN <small>($0.35 USD)</small></div>
-          <button class="add-btn" id="btn-163" onclick="addToCart(163,'Sm Oodles Raspberry',0.35,6.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-163" onclick="addToCart(163,'Sm Oodles Raspberry',0.35,6.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2063,7 +2070,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Sm | 6/48x.56 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$6.30 MXN <small>($0.35 USD)</small></div>
-          <button class="add-btn" id="btn-164" onclick="addToCart(164,'Sm Oodles Strawberry',0.35,6.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-164" onclick="addToCart(164,'Sm Oodles Strawberry',0.35,6.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2075,7 +2082,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Smirk | 6/24x1.76oz</div>
         <div class="card-bottom">
           <div class="card-price">$24.48 MXN <small>($1.36 USD)</small></div>
-          <button class="add-btn" id="btn-183" onclick="addToCart(183,'Smirk Bars',1.36,24.48)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-183" onclick="addToCart(183,'Smirk Bars',1.36,24.48)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2087,31 +2094,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Smirk | 4/10x5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$70.38 MXN <small>($3.91 USD)</small></div>
-          <button class="add-btn" id="btn-200" onclick="addToCart(200,'Smirk Bites',3.91,70.38)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-200" onclick="addToCart(200,'Smirk Bites',3.91,70.38)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="strawberry fruit leather" data-id="180">
-      <div class="card-img" id="img-180"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-180"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>עור פירות תות</div>
         <div class="card-name">Strawberry Fruit Leather</div>
         <div class="card-meta">Strawberry | 48/.75 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$17.64 MXN <small>($0.98 USD)</small></div>
-          <button class="add-btn" id="btn-180" onclick="addToCart(180,'Strawberry Fruit Leather',0.98,17.64)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-180" onclick="addToCart(180,'Strawberry Fruit Leather',0.98,17.64)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="ta'amti classic pesto" data-id="99">
-      <div class="card-img" id="img-99"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-99"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>תעמתי פסטו קלאסי</div>
         <div class="card-name">TA'AMTI CLASSIC PESTO</div>
         <div class="card-meta">TA'AMTI | 6.3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$83.52 MXN <small>($4.64 USD)</small></div>
-          <button class="add-btn" id="btn-99" onclick="addToCart(99,'TA\'AMTI CLASSIC PESTO',4.64,83.52)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-99" onclick="addToCart(99,'TA\'AMTI CLASSIC PESTO',4.64,83.52)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2123,31 +2130,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">TUSCANINI | 16 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$34.92 MXN <small>($1.94 USD)</small></div>
-          <button class="add-btn" id="btn-117" onclick="addToCart(117,'TUSCANINI COARSE MEDITERRANEAN SEA SALT',1.94,34.92)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-117" onclick="addToCart(117,'TUSCANINI COARSE MEDITERRANEAN SEA SALT',1.94,34.92)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="tuscanini sun dried tomatoes" data-id="118">
-      <div class="card-img" id="img-118"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-118"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>TUSCANINI עגבניות מיובשות</div>
         <div class="card-name">TUSCANINI SUN DRIED TOMATOES</div>
         <div class="card-meta">TUSCANINI | 10.6 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$109.62 MXN <small>($6.09 USD)</small></div>
-          <button class="add-btn" id="btn-118" onclick="addToCart(118,'TUSCANINI SUN DRIED TOMATOES',6.09,109.62)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-118" onclick="addToCart(118,'TUSCANINI SUN DRIED TOMATOES',6.09,109.62)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="vanilla sandwich" data-id="127">
-      <div class="card-img" id="img-127"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-127"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>סנדוויץ' וניל</div>
         <div class="card-name">Vanilla Sandwich</div>
         <div class="card-meta">Vanilla | 12/25 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$51.30 MXN <small>($2.85 USD)</small></div>
-          <button class="add-btn" id="btn-127" onclick="addToCart(127,'Vanilla Sandwich',2.85,51.3)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-127" onclick="addToCart(127,'Vanilla Sandwich',2.85,51.3)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2159,19 +2166,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Whip | 24/9.1 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$88.38 MXN <small>($4.91 USD)</small></div>
-          <button class="add-btn" id="btn-148" onclick="addToCart(148,'Whip De Do Bag (13 pk)',4.91,88.38)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-148" onclick="addToCart(148,'Whip De Do Bag (13 pk)',4.91,88.38)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="General Grocery" data-name="whip de do bar" data-id="184">
-      <div class="card-img" id="img-184"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-184"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>שוט דה דו בר</div>
         <div class="card-name">Whip De Do Bar</div>
         <div class="card-meta">Whip | 6/24x1.65 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$24.48 MXN <small>($1.36 USD)</small></div>
-          <button class="add-btn" id="btn-184" onclick="addToCart(184,'Whip De Do Bar',1.36,24.48)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-184" onclick="addToCart(184,'Whip De Do Bar',1.36,24.48)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2183,7 +2190,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">YEHUDA | 72 CT</div>
         <div class="card-bottom">
           <div class="card-price">$125.10 MXN <small>($6.95 USD)</small></div>
-          <button class="add-btn" id="btn-123" onclick="addToCart(123,'YEHUDA 72 CT SABBATH CANDLES',6.95,125.1)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-123" onclick="addToCart(123,'YEHUDA 72 CT SABBATH CANDLES',6.95,125.1)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2200,7 +2207,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">BARTENURA | 16 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$51.84 MXN <small>($2.88 USD)</small></div>
-          <button class="add-btn" id="btn-14" onclick="addToCart(14,'BARTENURA POTATO GNOCCHI',2.88,51.84)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-14" onclick="addToCart(14,'BARTENURA POTATO GNOCCHI',2.88,51.84)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2212,7 +2219,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 1.94 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$29.52 MXN <small>($1.64 USD)</small></div>
-          <button class="add-btn" id="btn-62" onclick="addToCart(62,'GEFEN FAT FREE NO MSG INSTANT CHICKEN NOODLE SOUP',1.64,29.52)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-62" onclick="addToCart(62,'GEFEN FAT FREE NO MSG INSTANT CHICKEN NOODLE SOUP',1.64,29.52)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2224,7 +2231,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 2.3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$25.74 MXN <small>($1.43 USD)</small></div>
-          <button class="add-btn" id="btn-59" onclick="addToCart(59,'GEFEN INSTANT CHICKEN NOODLE SOUP',1.43,25.74)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-59" onclick="addToCart(59,'GEFEN INSTANT CHICKEN NOODLE SOUP',1.43,25.74)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2236,7 +2243,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 8.8 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$19.98 MXN <small>($1.11 USD)</small></div>
-          <button class="add-btn" id="btn-43" onclick="addToCart(43,'GEFEN ISRAELI STYLE COUSCOUS - BAG',1.11,19.98)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-43" onclick="addToCart(43,'GEFEN ISRAELI STYLE COUSCOUS - BAG',1.11,19.98)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2248,7 +2255,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 2.3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$25.74 MXN <small>($1.43 USD)</small></div>
-          <button class="add-btn" id="btn-60" onclick="addToCart(60,'GEFEN NO MSG INSTANT CHICKEN NOODLE SOUP',1.43,25.74)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-60" onclick="addToCart(60,'GEFEN NO MSG INSTANT CHICKEN NOODLE SOUP',1.43,25.74)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2260,7 +2267,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 2.3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$25.74 MXN <small>($1.43 USD)</small></div>
-          <button class="add-btn" id="btn-61" onclick="addToCart(61,'GEFEN NO MSG INSTANT VEGETABLE NOODLE SOUP',1.43,25.74)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-61" onclick="addToCart(61,'GEFEN NO MSG INSTANT VEGETABLE NOODLE SOUP',1.43,25.74)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2272,7 +2279,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$12.60 MXN <small>($0.70 USD)</small></div>
-          <button class="add-btn" id="btn-63" onclick="addToCart(63,'GEFEN RAMEN NOODLES - CHICKEN FLAVOR',0.7,12.6)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-63" onclick="addToCart(63,'GEFEN RAMEN NOODLES - CHICKEN FLAVOR',0.7,12.6)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2284,19 +2291,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$12.60 MXN <small>($0.70 USD)</small></div>
-          <button class="add-btn" id="btn-64" onclick="addToCart(64,'GEFEN RAMEN NOODLES - VEGETABLE FLAVOR',0.7,12.6)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-64" onclick="addToCart(64,'GEFEN RAMEN NOODLES - VEGETABLE FLAVOR',0.7,12.6)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Pasta & Grains" data-name="gefen tricolor israeli style couscous - box" data-id="42">
-      <div class="card-img" id="img-42"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-42"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>קוסקוס GEFEN TRICOLOR ISRAELI STYLE - קופסא</div>
         <div class="card-name">GEFEN TRICOLOR ISRAELI STYLE COUSCOUS - BOX</div>
         <div class="card-meta">GEFEN | 8.8 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$32.58 MXN <small>($1.81 USD)</small></div>
-          <button class="add-btn" id="btn-42" onclick="addToCart(42,'GEFEN TRICOLOR ISRAELI STYLE COUSCOUS - BOX',1.81,32.58)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-42" onclick="addToCart(42,'GEFEN TRICOLOR ISRAELI STYLE COUSCOUS - BOX',1.81,32.58)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2308,7 +2315,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">TRADITION | 2.3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$9.54 MXN <small>($0.53 USD)</small></div>
-          <button class="add-btn" id="btn-110" onclick="addToCart(110,'TRADITION BEEF FLAVORED INSTANT NOODLE SOUP CUP',0.53,9.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-110" onclick="addToCart(110,'TRADITION BEEF FLAVORED INSTANT NOODLE SOUP CUP',0.53,9.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2320,7 +2327,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">TRADITION | 2.3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$9.54 MXN <small>($0.53 USD)</small></div>
-          <button class="add-btn" id="btn-109" onclick="addToCart(109,'TRADITION CHICKEN FLAVORED INSTANT NOODLE SOUP CUP',0.53,9.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-109" onclick="addToCart(109,'TRADITION CHICKEN FLAVORED INSTANT NOODLE SOUP CUP',0.53,9.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2332,7 +2339,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">TRADITION | 2.3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$9.54 MXN <small>($0.53 USD)</small></div>
-          <button class="add-btn" id="btn-112" onclick="addToCart(112,'TRADITION TOMATO FLAVORED INSTANT NOODLE SOUP CUP',0.53,9.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-112" onclick="addToCart(112,'TRADITION TOMATO FLAVORED INSTANT NOODLE SOUP CUP',0.53,9.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2344,19 +2351,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">TRADITION | 2.3 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$9.54 MXN <small>($0.53 USD)</small></div>
-          <button class="add-btn" id="btn-111" onclick="addToCart(111,'TRADITION VEGETABLE FLAVORED INSTANT NOODLE SOUP CUP',0.53,9.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-111" onclick="addToCart(111,'TRADITION VEGETABLE FLAVORED INSTANT NOODLE SOUP CUP',0.53,9.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Pasta & Grains" data-name="tuscanini potato gnocchi" data-id="116">
-      <div class="card-img" id="img-116"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-116"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>ניוקי תפוחי אדמה טוסקניני</div>
         <div class="card-name">TUSCANINI POTATO GNOCCHI</div>
         <div class="card-meta">TUSCANINI | 16 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$57.60 MXN <small>($3.20 USD)</small></div>
-          <button class="add-btn" id="btn-116" onclick="addToCart(116,'TUSCANINI POTATO GNOCCHI',3.2,57.6)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-116" onclick="addToCart(116,'TUSCANINI POTATO GNOCCHI',3.2,57.6)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2373,19 +2380,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Chips | 12/13 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$65.88 MXN <small>($3.66 USD)</small></div>
-          <button class="add-btn" id="btn-133" onclick="addToCart(133,'Chips a Plenty Chewy',3.66,65.88)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-133" onclick="addToCart(133,'Chips a Plenty Chewy',3.66,65.88)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Snacks & Cookies" data-name="chips a plenty prem" data-id="134">
-      <div class="card-img" id="img-134"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-134"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Chips a Plenty Prem</div>
         <div class="card-name">Chips a Plenty Prem</div>
         <div class="card-meta">Chips | 12/13 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$65.88 MXN <small>($3.66 USD)</small></div>
-          <button class="add-btn" id="btn-134" onclick="addToCart(134,'Chips a Plenty Prem',3.66,65.88)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-134" onclick="addToCart(134,'Chips a Plenty Prem',3.66,65.88)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2397,7 +2404,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">DORITOS | 2.5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$26.46 MXN <small>($1.47 USD)</small></div>
-          <button class="add-btn" id="btn-32" onclick="addToCart(32,'DORITOS BBQ TORTILLA CHIPS',1.47,26.46)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-32" onclick="addToCart(32,'DORITOS BBQ TORTILLA CHIPS',1.47,26.46)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2409,7 +2416,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">DORITOS | 2.5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$26.46 MXN <small>($1.47 USD)</small></div>
-          <button class="add-btn" id="btn-31" onclick="addToCart(31,'DORITOS SPICY SOUR TORTILLA CHIPS',1.47,26.46)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-31" onclick="addToCart(31,'DORITOS SPICY SOUR TORTILLA CHIPS',1.47,26.46)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2421,19 +2428,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 28.8 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$30.96 MXN <small>($1.72 USD)</small></div>
-          <button class="add-btn" id="btn-65" onclick="addToCart(65,'GEFEN 40 PK CHOCOLATE COATED WAFER',1.72,30.96)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-65" onclick="addToCart(65,'GEFEN 40 PK CHOCOLATE COATED WAFER',1.72,30.96)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Snacks & Cookies" data-name="gefen dill pickle chips" data-id="47">
-      <div class="card-img" id="img-47"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-47"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>גפן שמיר חמוץ צ'יפס</div>
         <div class="card-name">GEFEN DILL PICKLE CHIPS</div>
         <div class="card-meta">GEFEN | 32 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$71.82 MXN <small>($3.99 USD)</small></div>
-          <button class="add-btn" id="btn-47" onclick="addToCart(47,'GEFEN DILL PICKLE CHIPS',3.99,71.82)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-47" onclick="addToCart(47,'GEFEN DILL PICKLE CHIPS',3.99,71.82)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2445,7 +2452,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 10 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$125.28 MXN <small>($6.96 USD)</small></div>
-          <button class="add-btn" id="btn-34" onclick="addToCart(34,'GEFEN S/F SEMI-SWEET CHOCOLATE CHIPS',6.96,125.28)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-34" onclick="addToCart(34,'GEFEN S/F SEMI-SWEET CHOCOLATE CHIPS',6.96,125.28)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2457,43 +2464,43 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">HADAR | 6.1 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$32.22 MXN <small>($1.79 USD)</small></div>
-          <button class="add-btn" id="btn-83" onclick="addToCart(83,'HADAR TIROSH BISCUITS',1.79,32.22)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-83" onclick="addToCart(83,'HADAR TIROSH BISCUITS',1.79,32.22)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Snacks & Cookies" data-name="haddar chocolate wafers" data-id="91">
-      <div class="card-img" id="img-91"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-91"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>פרוסות שוקולד של HADAR</div>
         <div class="card-name">HADDAR CHOCOLATE WAFERS</div>
         <div class="card-meta">HADDAR | 17.6 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$56.52 MXN <small>($3.14 USD)</small></div>
-          <button class="add-btn" id="btn-91" onclick="addToCart(91,'HADDAR CHOCOLATE WAFERS',3.14,56.52)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-91" onclick="addToCart(91,'HADDAR CHOCOLATE WAFERS',3.14,56.52)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Snacks & Cookies" data-name="haddar mini mini pretzels multi-pack" data-id="90">
-      <div class="card-img" id="img-90"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-90"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>HADDAR MINI MINI PRETZELS MULTI-PACK</div>
         <div class="card-name">HADDAR MINI MINI PRETZELS MULTI-PACK</div>
         <div class="card-meta">HADDAR | 0.5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$90.54 MXN <small>($5.03 USD)</small></div>
-          <button class="add-btn" id="btn-90" onclick="addToCart(90,'HADDAR MINI MINI PRETZELS MULTI-PACK',5.03,90.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-90" onclick="addToCart(90,'HADDAR MINI MINI PRETZELS MULTI-PACK',5.03,90.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Snacks & Cookies" data-name="haddar soft chocolate chip cookies" data-id="92">
-      <div class="card-img" id="img-92"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-92"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>עוגיות שוקולד צ'יפס רך של HADAR</div>
         <div class="card-name">HADDAR SOFT CHOCOLATE CHIP COOKIES</div>
         <div class="card-meta">HADDAR | 10.5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$78.84 MXN <small>($4.38 USD)</small></div>
-          <button class="add-btn" id="btn-92" onclick="addToCart(92,'HADDAR SOFT CHOCOLATE CHIP COOKIES',4.38,78.84)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-92" onclick="addToCart(92,'HADDAR SOFT CHOCOLATE CHIP COOKIES',4.38,78.84)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2505,7 +2512,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">KEDEM | 6.1 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$32.40 MXN <small>($1.80 USD)</small></div>
-          <button class="add-btn" id="btn-10" onclick="addToCart(10,'KEDEM CHOCOLATE COVERED TEA BISCUITS',1.8,32.4)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-10" onclick="addToCart(10,'KEDEM CHOCOLATE COVERED TEA BISCUITS',1.8,32.4)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2517,7 +2524,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">KEDEM | 4.2 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$11.88 MXN <small>($0.66 USD)</small></div>
-          <button class="add-btn" id="btn-9" onclick="addToCart(9,'KEDEM CHOCOLATE TEA BISCUITS',0.66,11.88)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-9" onclick="addToCart(9,'KEDEM CHOCOLATE TEA BISCUITS',0.66,11.88)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2529,7 +2536,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">KEDEM | 12 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$48.42 MXN <small>($2.69 USD)</small></div>
-          <button class="add-btn" id="btn-5" onclick="addToCart(5,'KEDEM KIDS ANIMAL COOKIES',2.69,48.42)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-5" onclick="addToCart(5,'KEDEM KIDS ANIMAL COOKIES',2.69,48.42)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2541,7 +2548,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">KEDEM | 5.5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$82.98 MXN <small>($4.61 USD)</small></div>
-          <button class="add-btn" id="btn-3" onclick="addToCart(3,'KEDEM KIDS CHOCOLATE CEREAL BARS',4.61,82.98)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-3" onclick="addToCart(3,'KEDEM KIDS CHOCOLATE CEREAL BARS',4.61,82.98)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2553,7 +2560,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">KEDEM | 4.4 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$82.98 MXN <small>($4.61 USD)</small></div>
-          <button class="add-btn" id="btn-4" onclick="addToCart(4,'KEDEM KIDS COCO RICE CEREAL BARS',4.61,82.98)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-4" onclick="addToCart(4,'KEDEM KIDS COCO RICE CEREAL BARS',4.61,82.98)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2565,7 +2572,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">KEDEM | 5.5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$82.98 MXN <small>($4.61 USD)</small></div>
-          <button class="add-btn" id="btn-2" onclick="addToCart(2,'KEDEM KIDS ORIGINAL CEREAL BARS',4.61,82.98)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-2" onclick="addToCart(2,'KEDEM KIDS ORIGINAL CEREAL BARS',4.61,82.98)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2577,7 +2584,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">KEDEM | 4.2 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$11.88 MXN <small>($0.66 USD)</small></div>
-          <button class="add-btn" id="btn-7" onclick="addToCart(7,'KEDEM PLAIN TEA BISCUITS',0.66,11.88)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-7" onclick="addToCart(7,'KEDEM PLAIN TEA BISCUITS',0.66,11.88)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2589,7 +2596,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">KEDEM | 5.5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$19.26 MXN <small>($1.07 USD)</small></div>
-          <button class="add-btn" id="btn-11" onclick="addToCart(11,'KEDEM SUGAR FREE VANILLA TEA BISCUITS',1.07,19.26)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-11" onclick="addToCart(11,'KEDEM SUGAR FREE VANILLA TEA BISCUITS',1.07,19.26)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2601,19 +2608,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">KEDEM | 4.2 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$11.88 MXN <small>($0.66 USD)</small></div>
-          <button class="add-btn" id="btn-8" onclick="addToCart(8,'KEDEM VANILLA TEA BISCUITS',0.66,11.88)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-8" onclick="addToCart(8,'KEDEM VANILLA TEA BISCUITS',0.66,11.88)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Snacks & Cookies" data-name="klik cookie" data-id="193">
-      <div class="card-img" id="img-193"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-193"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>לחץ על Cookie</div>
         <div class="card-name">Klik Cookie</div>
         <div class="card-meta">Klik | 6/16x2.64 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$27.54 MXN <small>($1.53 USD)</small></div>
-          <button class="add-btn" id="btn-193" onclick="addToCart(193,'Klik Cookie',1.53,27.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-193" onclick="addToCart(193,'Klik Cookie',1.53,27.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2625,19 +2632,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">Klik | 6/24x1.34 oz</div>
         <div class="card-bottom">
           <div class="card-price">$18.36 MXN <small>($1.02 USD)</small></div>
-          <button class="add-btn" id="btn-190" onclick="addToCart(190,'Klik Cookies \'n Cream Bar (779)',1.02,18.36)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-190" onclick="addToCart(190,'Klik Cookies \'n Cream Bar (779)',1.02,18.36)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Snacks & Cookies" data-name="sm onion rings" data-id="203">
-      <div class="card-img" id="img-203"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-203"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>Sm טבעות בצל</div>
         <div class="card-name">Sm Onion Rings</div>
         <div class="card-meta">Sm | 48/.64 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$21.06 MXN <small>($1.17 USD)</small></div>
-          <button class="add-btn" id="btn-203" onclick="addToCart(203,'Sm Onion Rings',1.17,21.06)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-203" onclick="addToCart(203,'Sm Onion Rings',1.17,21.06)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2654,7 +2661,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">GEFEN | 14 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$66.96 MXN <small>($3.72 USD)</small></div>
-          <button class="add-btn" id="btn-44" onclick="addToCart(44,'GEFEN MINI SOUP MANDEL',3.72,66.96)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-44" onclick="addToCart(44,'GEFEN MINI SOUP MANDEL',3.72,66.96)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2666,7 +2673,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">LIPTON | 14.1 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$79.74 MXN <small>($4.43 USD)</small></div>
-          <button class="add-btn" id="btn-95" onclick="addToCart(95,'LIPTON CHICKEN FLAVORED CONSOMME (PAREVE)',4.43,79.74)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-95" onclick="addToCart(95,'LIPTON CHICKEN FLAVORED CONSOMME (PAREVE)',4.43,79.74)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2683,19 +2690,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">ELITE | 7 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$92.52 MXN <small>($5.14 USD)</small></div>
-          <button class="add-btn" id="btn-16" onclick="addToCart(16,'ELITE INSTANT COFFEE',5.14,92.52)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-16" onclick="addToCart(16,'ELITE INSTANT COFFEE',5.14,92.52)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Tea & Coffee" data-name="elite instant hazelnut coffee" data-id="19">
-      <div class="card-img" id="img-19"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-19"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>קפה נמס אגוזי לוז עילית</div>
         <div class="card-name">ELITE INSTANT HAZELNUT COFFEE</div>
         <div class="card-meta">ELITE | 7 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$181.26 MXN <small>($10.07 USD)</small></div>
-          <button class="add-btn" id="btn-19" onclick="addToCart(19,'ELITE INSTANT HAZELNUT COFFEE',10.07,181.26)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-19" onclick="addToCart(19,'ELITE INSTANT HAZELNUT COFFEE',10.07,181.26)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2707,7 +2714,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">ELITE | 7 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$181.26 MXN <small>($10.07 USD)</small></div>
-          <button class="add-btn" id="btn-18" onclick="addToCart(18,'ELITE MOCHA INSTANT COFFEE 12PK',10.07,181.26)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-18" onclick="addToCart(18,'ELITE MOCHA INSTANT COFFEE 12PK',10.07,181.26)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2719,7 +2726,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">ELITE | 3.5 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$57.78 MXN <small>($3.21 USD)</small></div>
-          <button class="add-btn" id="btn-20" onclick="addToCart(20,'ELITE TURKISH COFFEE',3.21,57.78)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-20" onclick="addToCart(20,'ELITE TURKISH COFFEE',3.21,57.78)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2731,7 +2738,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">ELITE | 7 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$90.54 MXN <small>($5.03 USD)</small></div>
-          <button class="add-btn" id="btn-17" onclick="addToCart(17,'ELITE VANILLA INSTANT COFFEE 12PK',5.03,90.54)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-17" onclick="addToCart(17,'ELITE VANILLA INSTANT COFFEE 12PK',5.03,90.54)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2743,7 +2750,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">WISSOTZKY | 1.32 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$47.88 MXN <small>($2.66 USD)</small></div>
-          <button class="add-btn" id="btn-122" onclick="addToCart(122,'WISSOTZKY CHAMOMILE NANA TEA',2.66,47.88)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-122" onclick="addToCart(122,'WISSOTZKY CHAMOMILE NANA TEA',2.66,47.88)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2755,7 +2762,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">WISSOTZKY | 1.06 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$51.66 MXN <small>($2.87 USD)</small></div>
-          <button class="add-btn" id="btn-121" onclick="addToCart(121,'WISSOTZKY CHAMOMILE TEA',2.87,51.66)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-121" onclick="addToCart(121,'WISSOTZKY CHAMOMILE TEA',2.87,51.66)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2765,98 +2772,98 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   <h2 class="cat-title">Wines & Spirits <span class="cat-count">23</span></h2>
   <div class="grid">
     <div class="card" data-cat="Wines & Spirits" data-name="farbrengen - melody nsr 4% (nm)" data-id="228">
-      <div class="card-img" id="img-228"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-228"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>FARBRENGEN - MELODY NSR 4% (NM)</div>
         <div class="card-name">FARBRENGEN - MELODY NSR 4% (NM)</div>
         <div class="card-meta">FARBRENGEN | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$789.12 MXN <small>($43.84 USD)</small></div>
-          <button class="add-btn" id="btn-228" onclick="addToCart(228,'FARBRENGEN - MELODY NSR 4% (NM)',43.84,789.12)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-228" onclick="addToCart(228,'FARBRENGEN - MELODY NSR 4% (NM)',43.84,789.12)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="joyvin red 6%" data-id="227">
-      <div class="card-img" id="img-227"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-227"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>JOYVIN RED 6%</div>
         <div class="card-name">JOYVIN RED 6%</div>
         <div class="card-meta">JOYVIN | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$1603.08 MXN <small>($89.06 USD)</small></div>
-          <button class="add-btn" id="btn-227" onclick="addToCart(227,'JOYVIN RED 6%',89.06,1603.08)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-227" onclick="addToCart(227,'JOYVIN RED 6%',89.06,1603.08)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="kedem - cream wines - cream malaga" data-id="212">
-      <div class="card-img" id="img-212"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-212"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>KEDEM - יינות שמנת - שמנת מלגה</div>
         <div class="card-name">KEDEM - CREAM WINES - CREAM MALAGA</div>
         <div class="card-meta">KEDEM | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$789.12 MXN <small>($43.84 USD)</small></div>
-          <button class="add-btn" id="btn-212" onclick="addToCart(212,'KEDEM - CREAM WINES - CREAM MALAGA',43.84,789.12)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-212" onclick="addToCart(212,'KEDEM - CREAM WINES - CREAM MALAGA',43.84,789.12)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="kedem - cream wines - cream niagara" data-id="213">
-      <div class="card-img" id="img-213"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-213"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>KEDEM - יינות שמנת - קרם ניאגרה</div>
         <div class="card-name">KEDEM - CREAM WINES - CREAM NIAGARA</div>
         <div class="card-meta">KEDEM | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$789.12 MXN <small>($43.84 USD)</small></div>
-          <button class="add-btn" id="btn-213" onclick="addToCart(213,'KEDEM - CREAM WINES - CREAM NIAGARA',43.84,789.12)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-213" onclick="addToCart(213,'KEDEM - CREAM WINES - CREAM NIAGARA',43.84,789.12)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="kedem - cream wines - cream pink" data-id="214">
-      <div class="card-img" id="img-214"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-214"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>KEDEM - יינות שמנת - ורוד שמנת</div>
         <div class="card-name">KEDEM - CREAM WINES - CREAM PINK</div>
         <div class="card-meta">KEDEM | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$789.12 MXN <small>($43.84 USD)</small></div>
-          <button class="add-btn" id="btn-214" onclick="addToCart(214,'KEDEM - CREAM WINES - CREAM PINK',43.84,789.12)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-214" onclick="addToCart(214,'KEDEM - CREAM WINES - CREAM PINK',43.84,789.12)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="kedem - cream wines - cream red" data-id="215">
-      <div class="card-img" id="img-215"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-215"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>KEDEM - יינות שמנת - קרם אדום</div>
         <div class="card-name">KEDEM - CREAM WINES - CREAM RED</div>
         <div class="card-meta">KEDEM | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$789.12 MXN <small>($43.84 USD)</small></div>
-          <button class="add-btn" id="btn-215" onclick="addToCart(215,'KEDEM - CREAM WINES - CREAM RED',43.84,789.12)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-215" onclick="addToCart(215,'KEDEM - CREAM WINES - CREAM RED',43.84,789.12)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="kedem - cream wines - cream rose" data-id="216">
-      <div class="card-img" id="img-216"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-216"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>KEDEM - יינות שמנת - קרם ורד</div>
         <div class="card-name">KEDEM - CREAM WINES - CREAM ROSE</div>
         <div class="card-meta">KEDEM | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$789.12 MXN <small>($43.84 USD)</small></div>
-          <button class="add-btn" id="btn-216" onclick="addToCart(216,'KEDEM - CREAM WINES - CREAM ROSE',43.84,789.12)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-216" onclick="addToCart(216,'KEDEM - CREAM WINES - CREAM ROSE',43.84,789.12)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="kedem - traditional wines - blush concord" data-id="208">
-      <div class="card-img" id="img-208"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-208"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>KEDEM - יינות מסורתיים - BLUSH CONCORD</div>
         <div class="card-name">KEDEM - TRADITIONAL WINES - BLUSH CONCORD</div>
         <div class="card-meta">KEDEM | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$789.12 MXN <small>($43.84 USD)</small></div>
-          <button class="add-btn" id="btn-208" onclick="addToCart(208,'KEDEM - TRADITIONAL WINES - BLUSH CONCORD',43.84,789.12)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-208" onclick="addToCart(208,'KEDEM - TRADITIONAL WINES - BLUSH CONCORD',43.84,789.12)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2868,31 +2875,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">KEDEM | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$789.12 MXN <small>($43.84 USD)</small></div>
-          <button class="add-btn" id="btn-209" onclick="addToCart(209,'KEDEM - TRADITIONAL WINES - CONCORD',43.84,789.12)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-209" onclick="addToCart(209,'KEDEM - TRADITIONAL WINES - CONCORD',43.84,789.12)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="kedem - traditional wines - concord kal 3.5%" data-id="210">
-      <div class="card-img" id="img-210"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-210"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>KEDEM - יינות מסורתיים - קונקורד קל 3.5%</div>
         <div class="card-name">KEDEM - TRADITIONAL WINES - CONCORD KAL 3.5%</div>
         <div class="card-meta">KEDEM | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$789.12 MXN <small>($43.84 USD)</small></div>
-          <button class="add-btn" id="btn-210" onclick="addToCart(210,'KEDEM - TRADITIONAL WINES - CONCORD KAL 3.5%',43.84,789.12)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-210" onclick="addToCart(210,'KEDEM - TRADITIONAL WINES - CONCORD KAL 3.5%',43.84,789.12)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="kedem - traditional wines - malaga" data-id="211">
-      <div class="card-img" id="img-211"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-211"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>קדם - יינות מסורתיים - מלגה</div>
         <div class="card-name">KEDEM - TRADITIONAL WINES - MALAGA</div>
         <div class="card-meta">KEDEM | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$789.12 MXN <small>($43.84 USD)</small></div>
-          <button class="add-btn" id="btn-211" onclick="addToCart(211,'KEDEM - TRADITIONAL WINES - MALAGA',43.84,789.12)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-211" onclick="addToCart(211,'KEDEM - TRADITIONAL WINES - MALAGA',43.84,789.12)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2904,7 +2911,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">KEDEM | 12.7 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$63.00 MXN <small>($3.50 USD)</small></div>
-          <button class="add-btn" id="btn-13" onclick="addToCart(13,'KEDEM RED WINE VINEGAR',3.5,63.0)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-13" onclick="addToCart(13,'KEDEM RED WINE VINEGAR',3.5,63.0)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2916,31 +2923,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">KEDEM | 12.7 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$40.32 MXN <small>($2.24 USD)</small></div>
-          <button class="add-btn" id="btn-6" onclick="addToCart(6,'KEDEM WHITE COOKING WINE',2.24,40.32)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-6" onclick="addToCart(6,'KEDEM WHITE COOKING WINE',2.24,40.32)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="king david (n.y.s.) - concord (m)" data-id="219">
-      <div class="card-img" id="img-219"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-219"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>KING DAVID (N.Y.S.) - CONCORD (M)</div>
         <div class="card-name">KING DAVID (N.Y.S.) - CONCORD (M)</div>
         <div class="card-meta">KING | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$1257.66 MXN <small>($69.87 USD)</small></div>
-          <button class="add-btn" id="btn-219" onclick="addToCart(219,'KING DAVID (N.Y.S.) - CONCORD (M)',69.87,1257.66)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-219" onclick="addToCart(219,'KING DAVID (N.Y.S.) - CONCORD (M)',69.87,1257.66)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="king david (n.y.s.) - sacramental (m)" data-id="220">
-      <div class="card-img" id="img-220"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-220"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>KING DAVID (N.Y.S.) - SACRAMENTAL (M)</div>
         <div class="card-name">KING DAVID (N.Y.S.) - SACRAMENTAL (M)</div>
         <div class="card-meta">KING | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$1257.66 MXN <small>($69.87 USD)</small></div>
-          <button class="add-btn" id="btn-220" onclick="addToCart(220,'KING DAVID (N.Y.S.) - SACRAMENTAL (M)',69.87,1257.66)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-220" onclick="addToCart(220,'KING DAVID (N.Y.S.) - SACRAMENTAL (M)',69.87,1257.66)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -2952,91 +2959,91 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="card-meta">RASHI | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$1578.24 MXN <small>($87.68 USD)</small></div>
-          <button class="add-btn" id="btn-222" onclick="addToCart(222,'RASHI - CLARET 11% (SSR)',87.68,1578.24)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-222" onclick="addToCart(222,'RASHI - CLARET 11% (SSR)',87.68,1578.24)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="rashi - concord grape 12%" data-id="223">
-      <div class="card-img" id="img-223"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-223"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>RASHI - CONCORD GRAPE 12%</div>
         <div class="card-name">RASHI - CONCORD GRAPE 12%</div>
         <div class="card-meta">RASHI | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$789.12 MXN <small>($43.84 USD)</small></div>
-          <button class="add-btn" id="btn-223" onclick="addToCart(223,'RASHI - CONCORD GRAPE 12%',43.84,789.12)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-223" onclick="addToCart(223,'RASHI - CONCORD GRAPE 12%',43.84,789.12)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="rashi - light pink concord 6%" data-id="224">
-      <div class="card-img" id="img-224"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-224"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>RASHI - LIGHT PINK CONCORD 6%</div>
         <div class="card-name">RASHI - LIGHT PINK CONCORD 6%</div>
         <div class="card-meta">RASHI | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$789.12 MXN <small>($43.84 USD)</small></div>
-          <button class="add-btn" id="btn-224" onclick="addToCart(224,'RASHI - LIGHT PINK CONCORD 6%',43.84,789.12)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-224" onclick="addToCart(224,'RASHI - LIGHT PINK CONCORD 6%',43.84,789.12)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="rashi - light red concord 6%" data-id="225">
-      <div class="card-img" id="img-225"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-225"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>RASHI - קונקורד אדום בהיר 6%</div>
         <div class="card-name">RASHI - LIGHT RED CONCORD 6%</div>
         <div class="card-meta">RASHI | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$789.12 MXN <small>($43.84 USD)</small></div>
-          <button class="add-btn" id="btn-225" onclick="addToCart(225,'RASHI - LIGHT RED CONCORD 6%',43.84,789.12)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-225" onclick="addToCart(225,'RASHI - LIGHT RED CONCORD 6%',43.84,789.12)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="rashi - light white concord 6%" data-id="226">
-      <div class="card-img" id="img-226"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-226"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>RASHI - LIGHT WHITE CONCORD 6%</div>
         <div class="card-name">RASHI - LIGHT WHITE CONCORD 6%</div>
         <div class="card-meta">RASHI | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$789.12 MXN <small>($43.84 USD)</small></div>
-          <button class="add-btn" id="btn-226" onclick="addToCart(226,'RASHI - LIGHT WHITE CONCORD 6%',43.84,789.12)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-226" onclick="addToCart(226,'RASHI - LIGHT WHITE CONCORD 6%',43.84,789.12)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="teperberg - moscato series (m) - red" data-id="217">
-      <div class="card-img" id="img-217"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-217"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>TEPERBERG - MOSCTO SERIES (M) - אדום</div>
         <div class="card-name">TEPERBERG - MOSCATO SERIES (M) - RED</div>
         <div class="card-meta">TEPERBERG | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$2441.52 MXN <small>($135.64 USD)</small></div>
-          <button class="add-btn" id="btn-217" onclick="addToCart(217,'TEPERBERG - MOSCATO SERIES (M) - RED',135.64,2441.52)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-217" onclick="addToCart(217,'TEPERBERG - MOSCATO SERIES (M) - RED',135.64,2441.52)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="tuscanini red cooking wine" data-id="113">
-      <div class="card-img" id="img-113"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-113"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>יין בישול אדום טוסקניני</div>
         <div class="card-name">TUSCANINI RED COOKING WINE</div>
         <div class="card-meta">TUSCANINI | 16.9 OZ</div>
         <div class="card-bottom">
           <div class="card-price">$86.22 MXN <small>($4.79 USD)</small></div>
-          <button class="add-btn" id="btn-113" onclick="addToCart(113,'TUSCANINI RED COOKING WINE',4.79,86.22)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-113" onclick="addToCart(113,'TUSCANINI RED COOKING WINE',4.79,86.22)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
     <div class="card" data-cat="Wines & Spirits" data-name="zion - etzion - kalil 4%" data-id="218">
-      <div class="card-img" id="img-218"><div class="no-img">📦</div></div>
+      <div class="card-img" id="img-218"><div class="no-img">&#x1F4E6;</div></div>
       <div class="card-body">
         <div class='card-hebrew'>ציון - עציון - קליל 4%</div>
         <div class="card-name">ZION - ETZION - KALIL 4%</div>
         <div class="card-meta">ZION | 750 ML (12)</div>
         <div class="card-bottom">
           <div class="card-price">$1479.60 MXN <small>($82.20 USD)</small></div>
-          <button class="add-btn" id="btn-218" onclick="addToCart(218,'ZION - ETZION - KALIL 4%',82.2,1479.6)">Agregar al Carrito</button>
+          <button class="add-btn" id="btn-218" onclick="addToCart(218,'ZION - ETZION - KALIL 4%',82.2,1479.6)" data-i18n="add_to_cart">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -3048,14 +3055,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
 <div class="cart-drawer" id="cart-drawer">
   <div class="cart-header">
-    <h3>🛒 Mi Carrito</h3>
+    <h3 data-i18n="cart_title">&#x1F6D2; Mi Carrito</h3>
     <button class="cart-close" onclick="toggleCart()">&times;</button>
   </div>
   <div class="cart-items" id="cart-items"></div>
   <div class="cart-footer" id="cart-footer" style="display:none">
     <div class="cart-total"><span>Total USD:</span><span id="cart-total-usd">$0.00</span></div>
     <div class="cart-total-mxn"><span>Total MXN:</span><span id="cart-total-mxn">$0.00</span></div>
-    <button class="checkout-btn" onclick="openCheckout()">Ir a Pagar / Checkout</button>
+    <button class="checkout-btn" onclick="openCheckout()" data-i18n="go_checkout">Ir a Pagar</button>
   </div>
 </div>
 
@@ -3063,46 +3070,46 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 <div class="modal-bg" id="checkout-modal">
   <div class="modal">
     <div class="modal-header">
-      <h3>Checkout / Pago</h3>
+      <h3 data-i18n="checkout_title">Finalizar Compra</h3>
       <button class="modal-close" onclick="closeCheckout()">&times;</button>
     </div>
     <div class="modal-body" id="checkout-body">
-      <div class="delivery-note">🚚 ENVIO GRATIS / FREE DELIVERY</div>
+      <div class="delivery-note" data-i18n="delivery_note">&#x1F69A; ENVIO GRATIS EN TODOS LOS PEDIDOS</div>
 
       <div class="form-group">
-        <label>Nombre / Name *</label>
-        <input type="text" id="co-name" placeholder="Tu nombre completo">
+        <label data-i18n="lbl_name">Nombre Completo *</label>
+        <input type="text" id="co-name" data-i18n-placeholder="ph_name" placeholder="Tu nombre completo">
       </div>
       <div class="form-group">
-        <label>Telefono / Phone (WhatsApp) *</label>
-        <input type="tel" id="co-phone" placeholder="+52 55 1234 5678">
+        <label data-i18n="lbl_phone">Telefono (WhatsApp) *</label>
+        <input type="tel" id="co-phone" data-i18n-placeholder="ph_phone" placeholder="+52 55 1234 5678">
       </div>
       <div class="form-group">
-        <label>Direccion de Entrega / Delivery Address *</label>
-        <textarea id="co-address" rows="2" placeholder="Calle, numero, colonia, ciudad"></textarea>
+        <label data-i18n="lbl_address">Direccion de Entrega *</label>
+        <textarea id="co-address" rows="2" data-i18n-placeholder="ph_address" placeholder="Calle, numero, colonia, ciudad"></textarea>
       </div>
       <div class="form-group">
-        <label>Notas / Notes</label>
-        <input type="text" id="co-notes" placeholder="Instrucciones especiales (opcional)">
+        <label data-i18n="lbl_notes">Notas (opcional)</label>
+        <input type="text" id="co-notes" data-i18n-placeholder="ph_notes" placeholder="Instrucciones especiales">
       </div>
 
-      <label style="font-size:.8em;font-weight:600;color:var(--green);margin-bottom:8px;display:block">Metodo de Pago / Payment Method</label>
+      <label style="font-size:.8em;font-weight:600;color:var(--green);margin-bottom:8px;display:block" data-i18n="lbl_payment">Metodo de Pago</label>
       <div class="payment-options">
         <div class="pay-opt selected" onclick="selectPay('cash',this)">
-          <div class="pay-icon">💵</div>
-          <div class="pay-label">Efectivo</div>
-          <div class="pay-desc">Pago contra entrega</div>
+          <div class="pay-icon">&#x1F4B5;</div>
+          <div class="pay-label" data-i18n="pay_cash">Efectivo</div>
+          <div class="pay-desc" data-i18n="pay_cash_desc">Pago contra entrega</div>
         </div>
         <div class="pay-opt" onclick="selectPay('transfer',this)">
-          <div class="pay-icon">🏦</div>
-          <div class="pay-label">Transferencia</div>
-          <div class="pay-desc">Deposito bancario</div>
+          <div class="pay-icon">&#x1F3E6;</div>
+          <div class="pay-label" data-i18n="pay_transfer">Transferencia</div>
+          <div class="pay-desc" data-i18n="pay_transfer_desc">Deposito bancario</div>
         </div>
       </div>
 
       <div class="order-summary" id="order-summary"></div>
 
-      <button class="place-order-btn" onclick="placeOrder()">Confirmar Pedido / Place Order</button>
+      <button class="place-order-btn" onclick="placeOrder()" data-i18n="place_order">Confirmar Pedido</button>
     </div>
   </div>
 </div>
@@ -3112,12 +3119,128 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 
 <!-- FOOTER -->
 <div class="footer">
-  <h2>✡ DESPENSA YOSEF ✡</h2>
-  <p>Productos Kosher de Calidad, Siempre Frescos</p>
-  <p>Quality Kosher Products, Always Fresh</p>
+  <h2>&#x2721; DESPENSA YOSEF &#x2721;</h2>
+  <p data-i18n="footer_line1">Productos Kosher de Calidad, Siempre Frescos</p>
+  <p data-i18n="footer_line2">Entrega a Domicilio &mdash; Pago Contra Entrega</p>
 </div>
 
 <script>
+// ─── TRANSLATIONS ───
+const T = {
+  es: {
+    subtitle: "ABARROTES KOSHER PREMIUM",
+    search_placeholder: "Buscar producto...",
+    nav_all: "Todos",
+    hero_tagline: "Productos Kosher Premium — Entrega a Domicilio",
+    stat_products: "Productos",
+    stat_categories: "Categorias",
+    free_delivery: "\u{1F69A} ENVIO GRATIS EN TODOS LOS PEDIDOS",
+    add_to_cart: "Agregar al Carrito",
+    in_cart: "\u2713 En carrito",
+    cart_title: "\u{1F6D2} Mi Carrito",
+    cart_empty: "Tu carrito esta vacio",
+    go_checkout: "Ir a Pagar",
+    checkout_title: "Finalizar Compra",
+    delivery_note: "\u{1F69A} ENVIO GRATIS EN TODOS LOS PEDIDOS",
+    lbl_name: "Nombre Completo *",
+    ph_name: "Tu nombre completo",
+    lbl_phone: "Telefono (WhatsApp) *",
+    ph_phone: "+52 55 1234 5678",
+    lbl_address: "Direccion de Entrega *",
+    ph_address: "Calle, numero, colonia, ciudad",
+    lbl_notes: "Notas (opcional)",
+    ph_notes: "Instrucciones especiales",
+    lbl_payment: "Metodo de Pago",
+    pay_cash: "Efectivo",
+    pay_cash_desc: "Pago contra entrega",
+    pay_transfer: "Transferencia",
+    pay_transfer_desc: "Deposito bancario",
+    place_order: "Confirmar Pedido",
+    footer_line1: "Productos Kosher de Calidad, Siempre Frescos",
+    footer_line2: "Entrega a Domicilio \u2014 Pago Contra Entrega",
+    toast_added: "Agregado al carrito",
+    toast_fill: "Por favor llena nombre, telefono y direccion",
+    confirm_title: "\u00A1Pedido Listo!",
+    confirm_msg: "Envia tu pedido por WhatsApp para confirmarlo:",
+    confirm_btn: "\u{1F4F1} Enviar Pedido por WhatsApp",
+    confirm_note: "Tu carrito se guardara hasta que confirmes.",
+    delivery_label: "Envio",
+    delivery_free: "GRATIS",
+    wa_order_header: "\u{1F6D2} *NUEVO PEDIDO \u2014 DESPENSA YOSEF*",
+    wa_delivery: "Envio: GRATIS",
+    wa_payment_cash: "Efectivo contra entrega",
+    wa_payment_transfer: "Transferencia bancaria",
+    lang_toggle: "ENGLISH"
+  },
+  en: {
+    subtitle: "PREMIUM KOSHER GROCERY",
+    search_placeholder: "Search product...",
+    nav_all: "All",
+    hero_tagline: "Premium Kosher Products — Home Delivery",
+    stat_products: "Products",
+    stat_categories: "Categories",
+    free_delivery: "\u{1F69A} FREE DELIVERY ON ALL ORDERS",
+    add_to_cart: "Add to Cart",
+    in_cart: "\u2713 In cart",
+    cart_title: "\u{1F6D2} My Cart",
+    cart_empty: "Your cart is empty",
+    go_checkout: "Checkout",
+    checkout_title: "Checkout",
+    delivery_note: "\u{1F69A} FREE DELIVERY ON ALL ORDERS",
+    lbl_name: "Full Name *",
+    ph_name: "Your full name",
+    lbl_phone: "Phone (WhatsApp) *",
+    ph_phone: "+52 55 1234 5678",
+    lbl_address: "Delivery Address *",
+    ph_address: "Street, number, neighborhood, city",
+    lbl_notes: "Notes (optional)",
+    ph_notes: "Special instructions",
+    lbl_payment: "Payment Method",
+    pay_cash: "Cash",
+    pay_cash_desc: "Pay on delivery",
+    pay_transfer: "Transfer",
+    pay_transfer_desc: "Bank deposit",
+    place_order: "Place Order",
+    footer_line1: "Quality Kosher Products, Always Fresh",
+    footer_line2: "Home Delivery \u2014 Pay on Delivery",
+    toast_added: "Added to cart",
+    toast_fill: "Please fill in name, phone and address",
+    confirm_title: "Order Ready!",
+    confirm_msg: "Send your order via WhatsApp to confirm:",
+    confirm_btn: "\u{1F4F1} Send Order via WhatsApp",
+    confirm_note: "Your cart will be saved until you confirm.",
+    delivery_label: "Delivery",
+    delivery_free: "FREE",
+    wa_order_header: "\u{1F6D2} *NEW ORDER \u2014 DESPENSA YOSEF*",
+    wa_delivery: "Delivery: FREE",
+    wa_payment_cash: "Cash on delivery",
+    wa_payment_transfer: "Bank transfer",
+    lang_toggle: "ESPA\u00D1OL"
+  }
+};
+
+let currentLang = 'es';
+
+function toggleLang() {
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  applyLang();
+  updateCartUI();
+}
+
+function applyLang() {
+  const lang = T[currentLang];
+  document.getElementById('lang-toggle').textContent = lang.lang_toggle;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (lang[key]) el.textContent = lang[key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (lang[key]) el.placeholder = lang[key];
+  });
+}
+
+// ─── CART ───
 let cart = JSON.parse(localStorage.getItem('dy_cart') || '{}');
 let payMethod = 'cash';
 
@@ -3127,16 +3250,16 @@ function saveCart() {
 }
 
 function updateCartUI() {
+  const lang = T[currentLang];
   const count = Object.values(cart).reduce((s, i) => s + i.qty, 0);
   document.getElementById('cart-badge').textContent = count;
-  // Update add buttons
   document.querySelectorAll('.add-btn').forEach(btn => {
     const id = btn.id.replace('btn-', '');
     if (cart[id]) {
-      btn.textContent = '✓ En carrito (' + cart[id].qty + ')';
+      btn.textContent = lang.in_cart + ' (' + cart[id].qty + ')';
       btn.classList.add('in-cart');
     } else {
-      btn.textContent = 'Agregar al Carrito';
+      btn.textContent = lang.add_to_cart;
       btn.classList.remove('in-cart');
     }
   });
@@ -3146,13 +3269,11 @@ function addToCart(id, name, usd, mxn) {
   if (cart[id]) {
     cart[id].qty++;
   } else {
-    // Get image src
     const imgEl = document.querySelector('#img-' + id + ' img');
-    const imgSrc = imgEl ? imgEl.src.substring(0, 100) : '';
     cart[id] = { name, usd, mxn, qty: 1, imgSrc: imgEl ? imgEl.src : '' };
   }
   saveCart();
-  showToast('Agregado al carrito');
+  showToast(T[currentLang].toast_added);
 }
 
 function toggleCart() {
@@ -3162,11 +3283,12 @@ function toggleCart() {
 }
 
 function renderCart() {
+  const lang = T[currentLang];
   const container = document.getElementById('cart-items');
   const footer = document.getElementById('cart-footer');
   const keys = Object.keys(cart);
   if (!keys.length) {
-    container.innerHTML = '<div class="cart-empty">Tu carrito esta vacio<br><br>🛒</div>';
+    container.innerHTML = '<div class="cart-empty">' + lang.cart_empty + '<br><br>\u{1F6D2}</div>';
     footer.style.display = 'none';
     return;
   }
@@ -3177,16 +3299,16 @@ function renderCart() {
     const item = cart[id];
     totalUsd += item.usd * item.qty;
     totalMxn += item.mxn * item.qty;
-    const imgHtml = item.imgSrc ? '<img src="' + item.imgSrc + '">' : '📦';
+    const imgHtml = item.imgSrc ? '<img src="' + item.imgSrc + '">' : '\u{1F4E6}';
     html += '<div class="ci">' +
       '<div class="ci-img">' + imgHtml + '</div>' +
       '<div class="ci-info"><div class="ci-name">' + item.name + '</div>' +
       '<div class="ci-price">$' + item.mxn.toFixed(2) + ' MXN</div></div>' +
       '<div class="ci-qty">' +
-      '<button onclick="changeQty(' + id + ',-1)">−</button>' +
+      '<button onclick="changeQty(' + id + ',-1)">\u2212</button>' +
       '<span>' + item.qty + '</span>' +
       '<button onclick="changeQty(' + id + ',1)">+</button></div>' +
-      '<button class="ci-del" onclick="removeItem(' + id + ')">🗑</button></div>';
+      '<button class="ci-del" onclick="removeItem(' + id + ')">\u{1F5D1}</button></div>';
   });
   container.innerHTML = html;
   document.getElementById('cart-total-usd').textContent = '$' + totalUsd.toFixed(2);
@@ -3224,6 +3346,7 @@ function selectPay(method, el) {
 }
 
 function renderOrderSummary() {
+  const lang = T[currentLang];
   let html = '';
   let totalUsd = 0, totalMxn = 0;
   Object.keys(cart).forEach(id => {
@@ -3232,51 +3355,50 @@ function renderOrderSummary() {
     totalMxn += item.mxn * item.qty;
     html += '<div class="os-line"><span>' + item.name + ' x' + item.qty + '</span><span>$' + (item.mxn * item.qty).toFixed(2) + '</span></div>';
   });
-  html += '<div class="os-line"><span>Envio / Delivery</span><span style="color:var(--green-light);font-weight:700">GRATIS</span></div>';
+  html += '<div class="os-line"><span>' + lang.delivery_label + '</span><span style="color:var(--green-light);font-weight:700">' + lang.delivery_free + '</span></div>';
   html += '<div class="os-line os-total"><span>TOTAL</span><span>$' + totalMxn.toFixed(2) + ' MXN ($' + totalUsd.toFixed(2) + ' USD)</span></div>';
   document.getElementById('order-summary').innerHTML = html;
 }
 
 function placeOrder() {
+  const lang = T[currentLang];
   const name = document.getElementById('co-name').value.trim();
   const phone = document.getElementById('co-phone').value.trim();
   const address = document.getElementById('co-address').value.trim();
   const notes = document.getElementById('co-notes').value.trim();
 
   if (!name || !phone || !address) {
-    showToast('Por favor llena nombre, telefono y direccion');
+    showToast(lang.toast_fill);
     return;
   }
 
-  // Build WhatsApp message
-  let msg = '🛒 *NUEVO PEDIDO — DESPENSA YOSEF*\n\n';
-  msg += '👤 *' + name + '*\n';
-  msg += '📞 ' + phone + '\n';
-  msg += '📍 ' + address + '\n';
-  if (notes) msg += '📝 ' + notes + '\n';
+  let msg = lang.wa_order_header + '\n\n';
+  msg += '\u{1F464} *' + name + '*\n';
+  msg += '\u{1F4DE} ' + phone + '\n';
+  msg += '\u{1F4CD} ' + address + '\n';
+  if (notes) msg += '\u{1F4DD} ' + notes + '\n';
   msg += '\n*Productos:*\n';
 
   let totalMxn = 0;
   Object.keys(cart).forEach(id => {
     const item = cart[id];
     totalMxn += item.mxn * item.qty;
-    msg += '• ' + item.name + ' x' + item.qty + ' — $' + (item.mxn * item.qty).toFixed(2) + '\n';
+    msg += '\u2022 ' + item.name + ' x' + item.qty + ' \u2014 $' + (item.mxn * item.qty).toFixed(2) + '\n';
   });
 
-  msg += '\n🚚 Envio: GRATIS\n';
-  msg += '💰 *TOTAL: $' + totalMxn.toFixed(2) + ' MXN*\n';
-  msg += '💳 Pago: ' + (payMethod === 'cash' ? 'Efectivo contra entrega' : 'Transferencia bancaria') + '\n';
+  msg += '\n\u{1F69A} ' + lang.wa_delivery + '\n';
+  msg += '\u{1F4B0} *TOTAL: $' + totalMxn.toFixed(2) + ' MXN*\n';
+  msg += '\u{1F4B3} Pago: ' + (payMethod === 'cash' ? lang.wa_payment_cash : lang.wa_payment_transfer) + '\n';
 
   const waUrl = 'https://wa.me/525512345678?text=' + encodeURIComponent(msg);
 
-  // Show confirmation
   document.getElementById('checkout-body').innerHTML =
     '<div class="confirm-screen">' +
-    '<div class="check">✅</div>' +
-    '<h3>Pedido Listo!</h3>' +
-    '<p>Envia tu pedido por WhatsApp para confirmarlo:</p>' +
-    '<a href="' + waUrl + '" target="_blank" class="wa-order-btn">📱 Enviar Pedido por WhatsApp</a>' +
-    '<p style="margin-top:16px;font-size:.8em;color:#999">Tu carrito se guardara hasta que confirmes.</p>' +
+    '<div class="check">\u2705</div>' +
+    '<h3>' + lang.confirm_title + '</h3>' +
+    '<p>' + lang.confirm_msg + '</p>' +
+    '<a href="' + waUrl + '" target="_blank" class="wa-order-btn">' + lang.confirm_btn + '</a>' +
+    '<p style="margin-top:16px;font-size:.8em;color:#999">' + lang.confirm_note + '</p>' +
     '</div>';
 }
 
@@ -3304,6 +3426,7 @@ function filterCat(cat, el) {
 
 // Init
 updateCartUI();
+applyLang();
 </script>
 </body>
 </html>
